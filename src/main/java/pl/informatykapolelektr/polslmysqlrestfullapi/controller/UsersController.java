@@ -22,7 +22,6 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
 
 import javax.validation.*;
 
-import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ReturnedNoContent.returnedNoContent;
 import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.*;
 
 import java.util.*;
