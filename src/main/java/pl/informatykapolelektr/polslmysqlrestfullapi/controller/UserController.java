@@ -28,11 +28,11 @@ import java.util.*;
 
 @RestController
 @RequestMapping(DEF_PREFIX + CREDENTIALS)
-public class UsersController {
+public class UserController {
 
-    private final UsersService usersService;
+    private final UserService usersService;
 
-    public UsersController(UsersService usersService) {
+    public UserController(UserService usersService) {
         this.usersService = usersService;
     }
 

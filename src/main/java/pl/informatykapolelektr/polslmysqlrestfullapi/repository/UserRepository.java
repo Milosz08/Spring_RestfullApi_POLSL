@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -12,17 +12,17 @@
  * governing permissions and limitations under the license.
  */
 
-package pl.informatykapolelektr.polslmysqlrestfullapi.service;
+package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
+import org.springframework.data.jpa.repository.*;
+import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
 import java.util.*;
 
-public interface UsersService {
+@Repository
+public interface UserRepository extends JpaRepository<User, String> {
 
-    List<User> getAllUsers();
-    User getSingleUser(int role);
-    User addUser(User user);
-    User editUser(int role, User user);
+    Optional<User> findByRole(int role);
 
 }

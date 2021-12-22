@@ -27,12 +27,12 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
 @Service
-public class UsersServiceImplementation implements UsersService {
+public class UserServiceImplementation implements UserService {
 
-    private final UsersRepository usersRepository;
+    private final UserRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UsersServiceImplementation(UsersRepository usersRepository) {
+    public UserServiceImplementation(UserRepository usersRepository) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
