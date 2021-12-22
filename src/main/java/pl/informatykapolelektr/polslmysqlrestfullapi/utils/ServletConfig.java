@@ -22,4 +22,6 @@ public class ServletConfig {
     // app endpoints
     public static final String CREDENTIALS = "credentials";
     public static final String CALENDAR = "calendar";
+    public static final String COVID = "covid";
+
 }

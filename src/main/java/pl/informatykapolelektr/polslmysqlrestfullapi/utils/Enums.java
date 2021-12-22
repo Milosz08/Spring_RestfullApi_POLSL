@@ -24,4 +24,11 @@ public class Enums {
         LOW, MEDIUM, HIGH
     }
 
+    /**
+     * Possible Covid-19 information tile types (closely related to the ReactJS front-end
+     * part -> see, ReactJS repository: https://github.com/Milosz08/ReactJS_Web_Application_POLSL).
+     */
+    public enum CovidDataEnums {
+        LEFT_TILE, CENTER_TILE, RIGHT_TILE
+    }
 }
