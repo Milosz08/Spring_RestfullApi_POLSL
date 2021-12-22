@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.Calendar;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
 
+import javax.validation.*;
+
 import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.*;
 
 @RestController
@@ -43,12 +45,12 @@ public class CalendarController {
     }
 
     @PostMapping
-    public ResponseEntity<Calendar> addCalendar(@RequestBody Calendar calendar) {
+    public ResponseEntity<Calendar> addCalendar(@Valid @RequestBody Calendar calendar) {
         return new ResponseEntity<>(calendarService.addCalendar(calendar), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Calendar> editCalendar(@PathVariable String id, @RequestBody Calendar calendar) {
+    public ResponseEntity<Calendar> editCalendar(@PathVariable String id, @Valid @RequestBody Calendar calendar) {
         return new ResponseEntity<>(calendarService.editCalendar(id, calendar), HttpStatus.OK);
     }
 
