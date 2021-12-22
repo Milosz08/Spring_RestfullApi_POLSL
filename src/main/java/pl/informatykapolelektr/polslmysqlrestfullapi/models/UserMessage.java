@@ -54,4 +54,7 @@ public class UserMessage extends AuditModel {
     @Column(name = "if_clicked", nullable = false)
     private boolean ifClicked = false;
 
+    @Column(name = "servlet_time", nullable = false)
+    private String servletTime;
+
 }

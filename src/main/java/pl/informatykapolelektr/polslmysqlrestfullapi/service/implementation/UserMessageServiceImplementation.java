@@ -18,7 +18,9 @@ import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
+import java.time.*;
 import java.util.*;
 
 @Service
@@ -37,6 +39,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
 
     @Override
     public UserMessage addUserMessage(UserMessage userMessage) {
+        userMessage.setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
         return userMessageRepository.save(userMessage);
     }
 
@@ -45,6 +48,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
         Optional<UserMessage> updateUserMessage = userMessageRepository.findById(id);
         if(updateUserMessage.isPresent()) {
             updateUserMessage.get().setIfClicked(true);
+            updateUserMessage.get().setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
             return userMessageRepository.save(updateUserMessage.get());
         }
         throw new RuntimeException("User message not found for the id: " + id);
