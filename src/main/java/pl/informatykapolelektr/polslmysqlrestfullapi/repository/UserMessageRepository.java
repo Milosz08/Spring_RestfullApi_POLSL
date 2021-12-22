@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -12,17 +12,10 @@
  * governing permissions and limitations under the license.
  */
 
-package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
+package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
-public class ServletConfig {
+import org.springframework.data.jpa.repository.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
-    // default app prefix
-    public static final String DEF_PREFIX = "/api/v2/javabean/";
-
-    // app endpoints
-    public static final String CREDENTIALS = "credentials";
-    public static final String CALENDAR = "calendar";
-    public static final String COVID = "covid";
-    public static final String USER_MESSAGES = "messages";
-
+public interface UserMessageRepository extends JpaRepository<UserMessage, String> {
 }

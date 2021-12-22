@@ -31,4 +31,13 @@ public class Enums {
     public enum CovidDataEnums {
         LEFT_TILE, CENTER_TILE, RIGHT_TILE
     }
+
+    /**
+     * Possible types of messages sent by users (closely related to the ReactJS front-end
+     * part -> see, ReactJS repository: https://github.com/Milosz08/ReactJS_Web_Application_POLSL).
+     */
+    public enum UserMessChoices {
+        OPTION_DISABLED, PAGE_ERROR, SHEDULE_MODIFY, CALENDAR_NEW_DATE, DEFAULT
+    }
+
 }
