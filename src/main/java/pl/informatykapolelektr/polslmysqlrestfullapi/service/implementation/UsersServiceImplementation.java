@@ -60,7 +60,8 @@ public class UsersServiceImplementation implements UsersService {
     public User editUser(int role, User user) {
         Optional<User> userUpdate = usersRepository.findByRole(role);
         if(userUpdate.isPresent()) {
-            return usersRepository.save(encodeFields(userUpdate.get()));
+            user.set_id(userUpdate.get().get_id());
+            return usersRepository.save(encodeFields(user));
         }
         throw new RuntimeException("User not found for the role: " + role);
     }
