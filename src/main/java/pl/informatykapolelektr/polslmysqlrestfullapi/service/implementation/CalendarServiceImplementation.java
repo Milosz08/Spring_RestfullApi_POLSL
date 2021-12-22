@@ -87,4 +87,5 @@ public class CalendarServiceImplementation implements CalendarService {
     public void deleteCalendars() {
         calendarRepository.deleteAll();
     }
+
 }
