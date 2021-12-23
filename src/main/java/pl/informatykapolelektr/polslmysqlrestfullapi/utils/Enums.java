@@ -40,4 +40,12 @@ public class Enums {
         OPTION_DISABLED, PAGE_ERROR, SHEDULE_MODIFY, CALENDAR_NEW_DATE, DEFAULT
     }
 
+    /**
+     * Possible types of updates sections (closely related to the ReactJS front-end
+     * part -> see, ReactJS repository: https://github.com/Milosz08/ReactJS_Web_Application_POLSL).
+     */
+    public enum AllUpdateTypes {
+        SUBJECTS, CALENDAR, SCHEDULE, HELPERS, COVID, BLOG_INJECTIONS, USER_MESS, AUTH
+    }
+
 }
