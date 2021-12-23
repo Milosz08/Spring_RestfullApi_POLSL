@@ -15,7 +15,13 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
-import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.models.Calendar;
+
+import java.util.*;
 
 public interface CalendarRepository extends JpaRepository<Calendar, String> {
+
+    @Query("SELECT calendar.updatedAt FROM Calendar calendar ORDER BY calendar.updatedAt")
+    List<Date> findLastEditField();
+
 }

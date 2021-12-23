@@ -17,5 +17,11 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 import org.springframework.data.jpa.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import java.util.*;
+
 public interface HelperLinkRepository extends JpaRepository<HelperLink, String> {
+
+    @Query("SELECT helperLink.updatedAt FROM HelperLink helperLink ORDER BY helperLink.updatedAt")
+    List<Date> findLastEditField();
+
 }

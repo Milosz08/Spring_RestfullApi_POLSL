@@ -24,4 +24,7 @@ public interface CovidRepository extends JpaRepository<Covid, String> {
 
     Optional<Covid> findByType(Enums.CovidDataEnums type);
 
+    @Query("SELECT covid.updatedAt FROM Covid covid ORDER BY covid.updatedAt")
+    List<Date> findLastEditField();
+
 }
