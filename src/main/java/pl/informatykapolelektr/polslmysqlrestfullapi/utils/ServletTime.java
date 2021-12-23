@@ -16,6 +16,7 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
 
 import java.time.*;
 import java.time.format.*;
+import java.util.*;
 
 public class ServletTime {
 
@@ -29,6 +30,16 @@ public class ServletTime {
     public ServletTime(LocalDateTime date, String pattern) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
         this.date = dtf.format(date);
+    }
+
+    private static LocalDateTime convertToLocalDateTimeViaMillisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public static String formattingDate(List<Date> getFromSqlQuery) {
+        getFromSqlQuery.sort(Date::compareTo);
+        LocalDateTime convert = convertToLocalDateTimeViaMillisecond(getFromSqlQuery.get(getFromSqlQuery.size() - 1));
+        return convert.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss"));
     }
 
     public static String insertZeros(Integer numberValue) {
