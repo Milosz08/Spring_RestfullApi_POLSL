@@ -14,12 +14,11 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
 
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 
 import java.util.*;
 
-public class ReturnedNoContent {
+public class ReturnedJsonContent {
 
     private static Map<String, Object> generateBasicInfo() {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -34,9 +33,29 @@ public class ReturnedNoContent {
         return messageProp;
     }
 
-    public static Map<String, Object> returnedNoContent(String message) {
+    public static Map<String, Object> returnedBasicInfoNoContent(String message) {
         Map<String, Object> body = generateBasicInfo();
         body.put("message", generateMessage(message));
+        return body;
+    }
+
+    private static Map<String, Object> generateUpdatedBasicInfo(Enums.AllUpdateTypes type) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("updatedDateFor", type);
+        return body;
+    }
+
+    private static Map<String, Object> generateServletTimeInfo(String date) {
+        Map<String, Object> servletTime = new LinkedHashMap<>();
+        String[] convert = date.split(",");
+        servletTime.put("fullDate", convert[0]);
+        servletTime.put("fullTime", convert[1].replace(" ", ""));
+        return servletTime;
+    }
+
+    public static Map<String, Object> returnedUpdatedDateContent(Enums.AllUpdateTypes type, String date) {
+        Map<String, Object> body = generateUpdatedBasicInfo(type);
+        body.put("servletTime", generateServletTimeInfo(date));
         return body;
     }
 
