@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -18,12 +18,6 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
-import java.util.*;
-
 @Repository
-public interface UserMessageRepository extends JpaRepository<UserMessage, String> {
-
-    @Query("SELECT userMessage.updatedAt FROM UserMessage userMessage ORDER BY userMessage.updatedAt")
-    List<Date> findLastEditField();
-
+public interface SemesterRepository extends JpaRepository<Semester, Long> {
 }

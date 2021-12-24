@@ -40,6 +40,7 @@ public class HelperLink extends AuditModel {
     private String _id;
 
     @NotNull(message = "Helper title field shouldn't be null type!")
+    @Size(min = 3, max = 50, message = "Helper title should have from 3 to 50 characters!")
     @Column(name = "helper_title", nullable = false)
     private String helperTitle;
 

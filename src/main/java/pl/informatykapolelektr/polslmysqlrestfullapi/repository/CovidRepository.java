@@ -15,11 +15,13 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
 import java.util.*;
 
+@Repository
 public interface CovidRepository extends JpaRepository<Covid, String> {
 
     Optional<Covid> findByType(Enums.CovidDataEnums type);

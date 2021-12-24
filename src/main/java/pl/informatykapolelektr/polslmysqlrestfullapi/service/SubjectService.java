@@ -12,18 +12,19 @@
  * governing permissions and limitations under the license.
  */
 
-package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
+package pl.informatykapolelektr.polslmysqlrestfullapi.service;
 
-import org.springframework.data.jpa.repository.*;
-import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
 import java.util.*;
 
-@Repository
-public interface UserMessageRepository extends JpaRepository<UserMessage, String> {
+public interface SubjectService {
 
-    @Query("SELECT userMessage.updatedAt FROM UserMessage userMessage ORDER BY userMessage.updatedAt")
-    List<Date> findLastEditField();
+    List<Subject> getAllSubjects();
+    Subject getSingleSubject(String id);
+    Subject addSubject(Subject subject);
+    Subject editSubject(String id, Subject subject);
+    void deleteSingleSubject(String id);
+    void deleteAllSubject();
 
 }

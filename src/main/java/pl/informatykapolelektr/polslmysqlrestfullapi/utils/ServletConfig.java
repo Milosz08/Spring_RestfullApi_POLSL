@@ -26,5 +26,5 @@ public class ServletConfig {
     public static final String USER_MESSAGES = "messages";
     public static final String HELPER_LINKS = "helpers";
     public static final String LAST_UPDATES = "updates";
-
+    public static final String SUBJECTS = "subjects";
 }

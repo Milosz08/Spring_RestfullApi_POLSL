@@ -15,7 +15,9 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+@Repository
 public interface CalendarItemsRepository extends JpaRepository<CalendarItems, String> {
 }

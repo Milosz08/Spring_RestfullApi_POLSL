@@ -14,41 +14,50 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.models;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import org.hibernate.annotations.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
+import java.util.*;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "covid_data")
-public class Covid extends AuditModel {
+@Table(name = "classes_items")
+public class ClassesItem extends AuditModel {
 
     @Id
     @GenericGenerator(
-        name = "covid_id",
+        name = "classes_id",
         strategy = "pl.informatykapolelektr.polslmysqlrestfullapi.utils.CustomIDGenerator"
     )
-    @GeneratedValue(generator = "covid_id")
-    @Column(name = "covid_id")
+    @GeneratedValue(generator = "classes_id")
+    @Column(name = "classes_id")
     private String _id;
 
-    @NotNull(message = "Covid type field shouldn't be null type!")
-    @Column(name = "covid_dir", nullable = false)
-    private Enums.CovidDataEnums type;
+    @NotNull(message = "Classes type field shouldn't be null type!")
+    @Size(min = 3, max = 50, message = "Classes type field should have from 3 to 50 characters!")
+    @Column(name = "classes_type", nullable = false)
+    private String type;
 
-    @NotNull(message = "Covid description field shouldn't be null type!")
-    @Size(min = 10, message = "Covid description field must have at least of 10 characters!")
-    @Column(name = "covid_descr", nullable = false)
-    private String description;
+    @NotNull(message = "Classes place field shouldn't be null type!")
+    @Size(min = 3, max = 20, message = "Classes place field should have at least of 3 characters!")
+    @Column(name = "classes_place", nullable = false)
+    private String place;
 
-    @Column(name = "covid_risk", nullable = false)
-    private int actualRiskNumber = 0;
+    @NotNull(message = "Classes type field shouldn't be null type!")
+    @Size(min = 3, max = 500, message = "Classes link field should have at least of 3 characters!")
+    @Column(name = "classes_link", nullable = false)
+    private String link;
+
+    @OneToMany(mappedBy = "classesPlatform")
+    private Set<Subject> subjects = new HashSet<>();
 
 }

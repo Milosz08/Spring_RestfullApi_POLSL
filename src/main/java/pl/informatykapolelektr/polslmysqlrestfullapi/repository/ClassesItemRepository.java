@@ -18,12 +18,6 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
-import java.util.*;
-
 @Repository
-public interface UserMessageRepository extends JpaRepository<UserMessage, String> {
-
-    @Query("SELECT userMessage.updatedAt FROM UserMessage userMessage ORDER BY userMessage.updatedAt")
-    List<Date> findLastEditField();
-
+public interface ClassesItemRepository extends JpaRepository<ClassesItem, Long> {
 }

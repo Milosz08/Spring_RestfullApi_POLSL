@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -14,10 +14,9 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.models;
 
-import lombok.*;
 import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 import org.hibernate.annotations.*;
-import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -30,26 +29,28 @@ import java.util.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Table(name = "calendar_items")
-public class CalendarItems extends AuditModel {
+@Table(name = "semesters")
+public class Semester extends AuditModel {
 
     @Id
-    @JsonIgnore
-    @Column(name = "calendar_item_id")
+    @GenericGenerator(
+        name = "sem_id",
+        strategy = "pl.informatykapolelektr.polslmysqlrestfullapi.utils.CustomIDGenerator"
+    )
+    @GeneratedValue(generator = "sem_id")
+    @Column(name = "sem_id")
     private String _id;
 
-    @NotNull(message = "Start time field shouldn't be null type!")
-    @Column(name = "start_time")
-    @Size(min = 5, max = 5, message = "Start time must have 5 characters in format: 'HH:mm'!")
-    private String start;
+    @NotNull(message = "Semester number field shouldn't be null type!")
+    @Column(name = "sem_number", nullable = false)
+    private int identity;
 
-    @NotNull(message = "Message field shouldn't be null type!")
-    @Size(min = 10, max = 80, message = "Calendar item message must have from 10 to 80 characters!")
-    @Column(name = "calendar_item_message")
-    private String message;
+    @NotNull(message = "Semester name field shouldn't be null type!")
+    @Size(min = 3, max = 20, message = "Semester name field should have from 3 to 20 characters!")
+    @Column(name = "sem_name", nullable = false)
+    private String name;
 
-    @Column(name = "calendar_item_level")
-    private Enums.CalendarImportantLevels importantLevel = Enums.CalendarImportantLevels.LOW;
+    @OneToMany(mappedBy = "semesters")
+    private Set<Subject> subjects = new HashSet<>();
 
 }

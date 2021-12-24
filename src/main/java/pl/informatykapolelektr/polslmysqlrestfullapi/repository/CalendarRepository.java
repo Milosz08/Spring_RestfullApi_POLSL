@@ -15,10 +15,12 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.Calendar;
 
 import java.util.*;
 
+@Repository
 public interface CalendarRepository extends JpaRepository<Calendar, String> {
 
     @Query("SELECT calendar.updatedAt FROM Calendar calendar ORDER BY calendar.updatedAt")
