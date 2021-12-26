@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -27,11 +28,8 @@ import java.util.*;
 @Service
 public class UserMessageServiceImplementation implements UserMessageService {
 
-    private final UserMessageRepository userMessageRepository;
-
-    public UserMessageServiceImplementation(UserMessageRepository userMessageRepository) {
-        this.userMessageRepository = userMessageRepository;
-    }
+    @Autowired
+    private UserMessageRepository userMessageRepository;
 
     @Override
     public List<UserMessage> getAllUserMessages() {

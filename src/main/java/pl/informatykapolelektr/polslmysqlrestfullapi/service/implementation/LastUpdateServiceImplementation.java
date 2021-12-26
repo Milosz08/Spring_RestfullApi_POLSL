@@ -15,6 +15,8 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
@@ -25,22 +27,16 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 @Service
 public class LastUpdateServiceImplementation implements LastUpdateService {
 
-    private final CalendarRepository calendarRepository;
-    private final HelperLinkRepository helperLinkRepository;
-    private final CovidRepository covidRepository;
-    private final UserMessageRepository userMessageRepository;
-    private final UserRepository userRepository;
-
-    public LastUpdateServiceImplementation(
-        CalendarRepository calendarRepository, HelperLinkRepository helperLinkRepository,
-        CovidRepository covidRepository, UserMessageRepository userMessageRepository, UserRepository userRepository
-    ) {
-        this.calendarRepository = calendarRepository;
-        this.helperLinkRepository = helperLinkRepository;
-        this.covidRepository = covidRepository;
-        this.userMessageRepository = userMessageRepository;
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private CalendarRepository calendarRepository;
+    @Autowired
+    private HelperLinkRepository helperLinkRepository;
+    @Autowired
+    private CovidRepository covidRepository;
+    @Autowired
+    private UserMessageRepository userMessageRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private Map<String, Object> singleRepoDateElement(List<Date> dates, Enums.AllUpdateTypes type) {
         String date = ServletTime.formattingDate(dates);

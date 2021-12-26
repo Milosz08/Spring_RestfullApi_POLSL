@@ -15,6 +15,8 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
@@ -26,13 +28,10 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 @Service
 public class HelperLinkServiceImplementation implements HelperLinkService {
 
-    private final HelperLinkRepository helperLinkRepository;
-    private final IconRepository iconRepository;
-
-    public HelperLinkServiceImplementation(HelperLinkRepository helperLinkRepository, IconRepository iconRepository) {
-        this.helperLinkRepository = helperLinkRepository;
-        this.iconRepository = iconRepository;
-    }
+    @Autowired
+    private HelperLinkRepository helperLinkRepository;
+    @Autowired
+    private IconRepository iconRepository;
 
     private HelperLink addOrUpdate(HelperLink helperLink) {
         helperLink.getHelperIcon().set_id(new RandomHexGenerator().generateSequence());

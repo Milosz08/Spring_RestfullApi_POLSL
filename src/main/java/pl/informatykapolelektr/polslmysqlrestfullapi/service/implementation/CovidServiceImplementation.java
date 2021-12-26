@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -26,11 +27,8 @@ import java.util.*;
 @Service
 public class CovidServiceImplementation implements CovidService {
 
-    private final CovidRepository covidRepository;
-
-    public CovidServiceImplementation(CovidRepository covidRepository) {
-        this.covidRepository = covidRepository;
-    }
+    @Autowired
+    private CovidRepository covidRepository;
 
     @Override
     public List<Covid> getAllCovidData() {

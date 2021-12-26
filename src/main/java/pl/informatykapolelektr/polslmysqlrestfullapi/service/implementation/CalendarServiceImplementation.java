@@ -15,6 +15,8 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import java.util.*;
+
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
@@ -27,15 +29,10 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 @Service
 public class CalendarServiceImplementation implements CalendarService {
 
-    private final CalendarRepository calendarRepository;
-    private final CalendarItemsRepository calendarItemsRepository;
-
-    public CalendarServiceImplementation(
-            CalendarRepository calendarRepository, CalendarItemsRepository calendarItemsRepository
-    ) {
-        this.calendarRepository = calendarRepository;
-        this.calendarItemsRepository = calendarItemsRepository;
-    }
+    @Autowired
+    private CalendarRepository calendarRepository;
+    @Autowired
+    private CalendarItemsRepository calendarItemsRepository;
 
     private Calendar addOrUpdate(Calendar calendar) {
         for (CalendarItems item : calendar.getItems()) {

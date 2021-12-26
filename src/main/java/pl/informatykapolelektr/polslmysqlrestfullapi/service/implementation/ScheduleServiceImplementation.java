@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -25,13 +26,10 @@ import java.util.*;
 @Service
 public class ScheduleServiceImplementation implements ScheduleService {
 
-    private final ScheduleRepository scheduleRepository;
-    private final SubjectRepository subjectRepository;
-
-    public ScheduleServiceImplementation(ScheduleRepository scheduleRepository, SubjectRepository subjectRepository) {
-        this.scheduleRepository = scheduleRepository;
-        this.subjectRepository = subjectRepository;
-    }
+    @Autowired
+    private ScheduleRepository scheduleRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     @Override
     public List<Schedule> getAllScheduleSubjects() {

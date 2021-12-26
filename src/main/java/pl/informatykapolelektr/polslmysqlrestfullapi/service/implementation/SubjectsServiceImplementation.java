@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -26,20 +27,16 @@ import java.util.*;
 @Service
 public class SubjectsServiceImplementation implements SubjectService {
 
-    private final SubjectRepository subjectRepository;
-    private final SemesterRepository semesterRepository;
-    private final DepartmentRepository departmentRepository;
-    private final ClassesItemRepository classesItemRepository;
-
-    public SubjectsServiceImplementation(SubjectRepository subjectRepository,
-        SemesterRepository semesterRepository, DepartmentRepository departmentRepository,
-        ClassesItemRepository classesItemRepository
-    ) {
-        this.subjectRepository = subjectRepository;
-        this.semesterRepository = semesterRepository;
-        this.departmentRepository = departmentRepository;
-        this.classesItemRepository = classesItemRepository;
-    }
+    @Autowired
+    private SubjectRepository subjectRepository;
+    @Autowired
+    private SemesterRepository semesterRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
+    @Autowired
+    private ClassesItemRepository classesItemRepository;
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
     private Subject addOrUpdate(Subject subject) {
         subject.getIcon().set_id(new RandomHexGenerator().generateSequence());
