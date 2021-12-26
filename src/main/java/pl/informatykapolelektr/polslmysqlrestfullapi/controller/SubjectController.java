@@ -56,13 +56,13 @@ public class SubjectController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSingleSubject(@PathVariable String id) {
+    public ResponseEntity<Void> deleteSingleSubject(@PathVariable String id) {
         subjectService.deleteSingleSubject(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteAllSubjects() {
+    public ResponseEntity<Void> deleteAllSubjects() {
         subjectService.deleteAllSubject();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

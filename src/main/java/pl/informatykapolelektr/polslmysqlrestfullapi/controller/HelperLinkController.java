@@ -55,13 +55,13 @@ public class HelperLinkController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSingleHelperLink(@PathVariable String id) {
+    public ResponseEntity<Void> deleteSingleHelperLink(@PathVariable String id) {
         helperLinkService.deleteSingleHelperLink(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteAllHelperLinks() {
+    public ResponseEntity<Void> deleteAllHelperLinks() {
         helperLinkService.deleteAllHelperLink();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -55,13 +55,13 @@ public class CalendarController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSingleCalendar(@PathVariable String id) {
+    public ResponseEntity<Void> deleteSingleCalendar(@PathVariable String id) {
         calendarService.deleteSingleCalendar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping()
-    public ResponseEntity<String> deleteCalendars() {
+    public ResponseEntity<Void> deleteCalendars() {
         calendarService.deleteCalendars();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

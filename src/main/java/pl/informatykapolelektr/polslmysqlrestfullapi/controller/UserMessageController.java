@@ -49,13 +49,13 @@ public class UserMessageController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserMessage(@PathVariable String id) {
+    public ResponseEntity<Void> deleteUserMessage(@PathVariable String id) {
         userMessageService.deleteSingleUserMessage(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteAllUserMessages() {
+    public ResponseEntity<Void> deleteAllUserMessages() {
         userMessageService.deleteAllUserMessages();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
