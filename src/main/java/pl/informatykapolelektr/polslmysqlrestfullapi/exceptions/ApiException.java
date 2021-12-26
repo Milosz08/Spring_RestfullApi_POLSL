@@ -15,9 +15,6 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.exceptions;
 
 import lombok.*;
-import org.springframework.http.*;
-
-import java.time.*;
 
 @Data
 public class ApiException {
