@@ -21,6 +21,4 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, String> {
 
-
-
 }
