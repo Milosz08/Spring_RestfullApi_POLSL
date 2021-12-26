@@ -15,10 +15,16 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import java.util.*;
+
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, String> {
+
+    @Query("SELECT s FROM Subject s WHERE s.title=:t")
+    Optional<Subject> findSubjectByTitle(@Param("t") String title);
 
 }

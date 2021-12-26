@@ -74,6 +74,20 @@ public class SubjectsServiceImplementation implements SubjectService {
         Optional<Subject> subjectFind = subjectRepository.findById(id);
         if (subjectFind.isPresent()) {
             subject.set_id(id);
+            if(!subjectFind.get().getTitle().equals(subject.getTitle())) {
+                Optional<Schedule> scheduleSubjectFind = scheduleRepository.getScheduleSubjectByTitle(
+                    subjectFind.get().getTitle()
+                );
+                if(scheduleSubjectFind.isPresent()) {
+                    scheduleSubjectFind.get().setTitle(subject.getTitle());
+                    scheduleRepository.save(scheduleSubjectFind.get());
+                } else {
+                    throw new ApiRequestException(
+                        "Nie znaleziono istniejącego przedmiotu o tytule: " +
+                        subjectFind.get().getTitle() + "w bazie danych!"
+                    );
+                }
+            }
             return addOrUpdate(subject);
         }
         throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
