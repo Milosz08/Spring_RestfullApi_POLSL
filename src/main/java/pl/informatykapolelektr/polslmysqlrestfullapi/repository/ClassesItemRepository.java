@@ -15,9 +15,16 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import java.util.*;
+
 @Repository
 public interface ClassesItemRepository extends JpaRepository<ClassesItem, Long> {
+
+    @Query("SELECT c FROM ClassesItem c WHERE c.type=:t AND c.place=:p AND c.link=:l")
+    List<ClassesItem> getClassesItemBy(@Param("t") String type, @Param("p") String place, @Param("l") String link);
+
 }

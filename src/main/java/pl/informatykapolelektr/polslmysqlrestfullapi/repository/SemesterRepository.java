@@ -15,9 +15,16 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import java.util.*;
+
 @Repository
-public interface SemesterRepository extends JpaRepository<Semester, Long> {
+public interface SemesterRepository extends JpaRepository<Semester, String> {
+
+    @Query("SELECT s FROM Semester s WHERE s.identity=:i AND s.name=:n")
+    List<Semester> getSemesterBy(@Param("i") int identity, @Param("n") String name);
+
 }

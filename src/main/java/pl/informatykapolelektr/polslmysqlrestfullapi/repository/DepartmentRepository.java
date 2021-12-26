@@ -15,9 +15,16 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import java.util.*;
+
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Long> {
+public interface DepartmentRepository extends JpaRepository<Department, String> {
+
+    @Query("SELECT d FROM Department d WHERE d.title=:t AND d.shortName=:s AND d.link=:l")
+    List<Department> getDepartmentBy(@Param("t") String title, @Param("s") String shortName, @Param("l") String link);
+
 }
