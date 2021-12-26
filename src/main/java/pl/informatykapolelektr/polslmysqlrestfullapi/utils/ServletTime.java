@@ -27,11 +27,6 @@ public class ServletTime {
         this.date = dtf.format(date);
     }
 
-    public ServletTime(LocalDateTime date, String pattern) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
-        this.date = dtf.format(date);
-    }
-
     private static LocalDateTime convertToLocalDateTimeViaMillisecond(Date dateToConvert) {
         return Instant.ofEpochMilli(dateToConvert.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }

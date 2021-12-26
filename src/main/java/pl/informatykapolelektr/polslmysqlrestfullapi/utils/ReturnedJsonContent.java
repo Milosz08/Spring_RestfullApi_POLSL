@@ -14,30 +14,9 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
 
-import org.springframework.http.*;
-
 import java.util.*;
 
 public class ReturnedJsonContent {
-
-    private static Map<String, Object> generateBasicInfo() {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", System.currentTimeMillis());
-        body.put("status", HttpStatus.NO_CONTENT);
-        return body;
-    }
-
-    private static Map<String, Object> generateMessage(String message) {
-        Map<String, Object> messageProp = new LinkedHashMap<>();
-        messageProp.put("value", message);
-        return messageProp;
-    }
-
-    public static Map<String, Object> returnedBasicInfoNoContent(String message) {
-        Map<String, Object> body = generateBasicInfo();
-        body.put("message", generateMessage(message));
-        return body;
-    }
 
     private static Map<String, Object> generateUpdatedBasicInfo(Enums.AllUpdateTypes type) {
         Map<String, Object> body = new LinkedHashMap<>();
