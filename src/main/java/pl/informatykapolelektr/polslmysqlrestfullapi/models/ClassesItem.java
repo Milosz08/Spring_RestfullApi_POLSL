@@ -34,12 +34,8 @@ import java.util.*;
 public class ClassesItem extends AuditModel {
 
     @Id
-    @GenericGenerator(
-        name = "classes_id",
-        strategy = "pl.informatykapolelektr.polslmysqlrestfullapi.utils.CustomIDGenerator"
-    )
-    @GeneratedValue(generator = "classes_id")
     @Column(name = "classes_id")
+    @JsonIgnore
     private String _id;
 
     @NotNull(message = "Classes type field shouldn't be null type!")
@@ -56,8 +52,5 @@ public class ClassesItem extends AuditModel {
     @Size(min = 3, max = 500, message = "Classes link field should have at least of 3 characters!")
     @Column(name = "classes_link", nullable = false)
     private String link;
-
-    @OneToMany(mappedBy = "classesPlatform")
-    private Set<Subject> subjects = new HashSet<>();
 
 }

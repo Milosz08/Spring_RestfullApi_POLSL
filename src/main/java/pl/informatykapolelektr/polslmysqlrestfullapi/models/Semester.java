@@ -33,12 +33,8 @@ import java.util.*;
 public class Semester extends AuditModel {
 
     @Id
-    @GenericGenerator(
-        name = "sem_id",
-        strategy = "pl.informatykapolelektr.polslmysqlrestfullapi.utils.CustomIDGenerator"
-    )
-    @GeneratedValue(generator = "sem_id")
     @Column(name = "sem_id")
+    @JsonIgnore
     private String _id;
 
     @NotNull(message = "Semester number field shouldn't be null type!")
@@ -49,8 +45,5 @@ public class Semester extends AuditModel {
     @Size(min = 3, max = 20, message = "Semester name field should have from 3 to 20 characters!")
     @Column(name = "sem_name", nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "semesters")
-    private Set<Subject> subjects = new HashSet<>();
 
 }

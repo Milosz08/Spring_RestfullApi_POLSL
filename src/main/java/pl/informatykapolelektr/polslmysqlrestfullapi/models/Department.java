@@ -34,13 +34,9 @@ import java.util.*;
 public class Department extends AuditModel {
 
     @Id
-    @GenericGenerator(
-        name = "dept_id",
-        strategy = "pl.informatykapolelektr.polslmysqlrestfullapi.utils.CustomIDGenerator"
-    )
-    @GeneratedValue(generator = "dept_id")
     @Column(name = "dept_id")
-    private String _id = new RandomHexGenerator().generateSequence();
+    @JsonIgnore
+    private String _id;
 
     @NotNull(message = "Department name field shouldn't be null type!")
     @Size(min = 3, max = 50, message = "Department name should have from 3 to 50 characters!")
@@ -56,8 +52,5 @@ public class Department extends AuditModel {
     @Size(min = 10, message = "Department link should have at least of 10 characters!")
     @Column(name = "dept_link", nullable = false)
     private String link;
-
-    @OneToMany(mappedBy = "departments")
-    private Set<Subject> subjects = new HashSet<>();
 
 }
