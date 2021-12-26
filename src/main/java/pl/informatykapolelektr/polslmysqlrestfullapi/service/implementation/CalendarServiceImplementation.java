@@ -17,6 +17,7 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 import java.util.*;
 import org.springframework.stereotype.*;
 
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.Calendar;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
@@ -60,7 +61,7 @@ public class CalendarServiceImplementation implements CalendarService {
         if (calendar.isPresent()) {
             return calendar.get();
         }
-        throw new RuntimeException("Calendar not found for the ID: " + id);
+        throw new ApiRequestException("Zawartość kalendarza o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override
@@ -75,7 +76,7 @@ public class CalendarServiceImplementation implements CalendarService {
         if (calendarFind.isPresent()) {
             return addOrUpdate(calendar);
         }
-        throw new RuntimeException("Calendar not found for the ID: " + id);
+        throw new ApiRequestException("Zawartość kalendarza o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override

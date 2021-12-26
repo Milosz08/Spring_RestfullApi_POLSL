@@ -17,6 +17,7 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 import java.util.*;
 import org.springframework.stereotype.*;
 
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
@@ -76,7 +77,7 @@ public class LastUpdateServiceImplementation implements LastUpdateService {
             case AUTH:
                 date = ServletTime.formattingDate(userRepository.findLastEditField());
             default:
-                throw new RuntimeException("Unsupported date format!");
+                throw new ApiRequestException("Podany typ: " + type + " nie istenie w obsługiwanej encji!");
         }
         return ReturnedJsonContent.returnedUpdatedDateContent(type, date);
     }

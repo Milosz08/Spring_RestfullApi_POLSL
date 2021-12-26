@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import org.springframework.stereotype.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -60,7 +61,7 @@ public class SubjectsServiceImplementation implements SubjectService {
         if (subjectFind.isPresent()) {
             return subjectFind.get();
         }
-        throw new RuntimeException("Subject not found for the id: " + id);
+        throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override
@@ -75,7 +76,7 @@ public class SubjectsServiceImplementation implements SubjectService {
             subject.set_id(id);
             return addOrUpdate(subject);
         }
-        throw new RuntimeException("Subject not found for the id: " + id);
+        throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override

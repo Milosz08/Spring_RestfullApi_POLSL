@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import org.springframework.stereotype.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -48,7 +49,7 @@ public class CovidServiceImplementation implements CovidService {
             covid.set_id(covidUpdate.get().get_id());
             return covidRepository.save(covid);
         }
-        throw new RuntimeException("Covid data not found for the type: " + type);
+        throw new ApiRequestException("Element o typie: " + type + " nie znajduje się w bazie danych!");
     }
 
 }

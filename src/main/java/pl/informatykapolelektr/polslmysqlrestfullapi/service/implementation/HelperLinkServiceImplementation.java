@@ -17,6 +17,7 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 import java.util.*;
 import org.springframework.stereotype.*;
 
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -51,7 +52,7 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
         if(helperLinkFind.isPresent()) {
             return helperLinkFind.get();
         }
-        throw new RuntimeException("Link not found for the ID: " + id);
+        throw new ApiRequestException("Link pomocy o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override
@@ -66,7 +67,7 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
         if (helperLinkFind.isPresent()) {
             return addOrUpdate(helperLink);
         }
-        throw new RuntimeException("Link not found for the ID: " + id);
+        throw new ApiRequestException("Link pomocy o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override

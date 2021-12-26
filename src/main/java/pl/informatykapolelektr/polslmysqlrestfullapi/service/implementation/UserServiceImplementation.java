@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.stereotype.*;
 import org.springframework.security.crypto.password.*;
 
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -48,7 +49,7 @@ public class UserServiceImplementation implements UserService {
         if(user.isPresent()) {
             return user.get();
         }
-        throw new RuntimeException("User not found for the role: " + role);
+        throw new ApiRequestException("Użytkownik z rolą: " + role + " nie znajduje się w bazie danych!");
     }
 
     @Override
@@ -63,7 +64,7 @@ public class UserServiceImplementation implements UserService {
             user.set_id(userUpdate.get().get_id());
             return usersRepository.save(encodeFields(user));
         }
-        throw new RuntimeException("User not found for the role: " + role);
+        throw new ApiRequestException("Użytkownik z rolą: " + role + " nie znajduje się w bazie danych!");
     }
 
     private User encodeFields(User user) {

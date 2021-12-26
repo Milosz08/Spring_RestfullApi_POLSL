@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import org.springframework.stereotype.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -51,7 +52,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
             updateUserMessage.get().setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
             return userMessageRepository.save(updateUserMessage.get());
         }
-        throw new RuntimeException("User message not found for the id: " + id);
+        throw new ApiRequestException("Wiadomość o ID: " + id + " nie znajduje się w bazie danych!");
     }
 
     @Override
