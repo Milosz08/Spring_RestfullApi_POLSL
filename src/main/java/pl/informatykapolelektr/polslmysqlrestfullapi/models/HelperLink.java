@@ -39,18 +39,21 @@ public class HelperLink extends AuditModel {
     @Column(name = "helper_id")
     private String _id;
 
-    @NotNull(message = "Helper title field shouldn't be null type!")
-    @Size(min = 3, max = 50, message = "Helper title should have from 3 to 50 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za tytuł linku pomocy")
+    @Size(
+        min = 3, max = 50,
+        message = "Pole opisujące tytuł linku powinno zawierać od 3 do 50 znaków"
+    )
     @Column(name = "helper_title", nullable = false)
     private String helperTitle;
 
-    @NotNull(message = "Helper link field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za link pomocy")
     @Column(name = "helper_link", nullable = false)
     private String helperLink;
 
     @OneToOne(targetEntity = Icon.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "icon_bind", referencedColumnName = "icon_id")
-    @NotNull(message = "Helper link must have single icon field properties")
+    @NotNull(message = "Link pomocy musi mieć jednen obiekt opisujący ikonę")
     private Icon helperIcon;
 
 }

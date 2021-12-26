@@ -43,15 +43,15 @@ public class Calendar extends AuditModel {
     @Column(name = "calendar_id")
     private String _id;
 
-    @NotNull(message = "Day field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za dzień aktywności kalendarza")
     @Column(name = "calendar_day", nullable = false)
     private int day;
 
-    @NotNull(message = "Month field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za miesiąc aktywności kalendarza")
     @Column(name = "calendar_moth", nullable = false)
     private int month;
 
-    @NotNull(message = "Year field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za rok aktywności kalendarza")
     @Column(name = "calendar_year", nullable = false)
     private int year;
 
@@ -60,7 +60,7 @@ public class Calendar extends AuditModel {
 
     @OneToMany(targetEntity = CalendarItems.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "item_bind", referencedColumnName = "calendar_id")
-    @NotNull(message = "Calendar must have at least one activity item")
+    @NotNull(message = "Wydarzenie musi mieć przynajmniej jednen obiekt z aktywnością")
     private List<CalendarItems> items;
 
 }

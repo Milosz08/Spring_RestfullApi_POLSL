@@ -39,15 +39,14 @@ public class UserMessage extends AuditModel {
     @Column(name = "message_id")
     private String _id;
 
-    @NotNull(message = "Username field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za nick użytkownika wysyłającego wiadomość")
     @Column(name = "user_name", nullable = false)
     private String userIdentity;
 
-    @NotNull(message = "User choice field shouldn't be null type!")
     @Column(name = "user_choice", nullable = false)
-    private Enums.UserMessChoices userChoice;
+    private Enums.UserMessChoices userChoice = Enums.UserMessChoices.PAGE_ERROR;
 
-    @NotNull(message = "User message field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za treść wiadomości użytkownika")
     @Column(name = "user_message", nullable = false)
     private String userMessage;
 

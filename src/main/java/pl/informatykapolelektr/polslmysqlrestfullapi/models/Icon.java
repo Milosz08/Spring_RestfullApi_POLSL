@@ -35,14 +35,10 @@ public class Icon extends AuditModel {
     @JsonIgnore
     private String _id;
 
-    @NotNull(message = "Icon family field shouldn't be null type!")
-    @NotBlank(message = "Icon family must have content!")
     @Column(name = "icon_family", nullable = false)
-    private String family;
+    private String family = "FontAwesomeIcons";
 
-    @NotNull(message = "Icon name field shouldn't be null type!")
-    @NotBlank(message = "Icon name must have content!")
     @Column(name = "icon_name", nullable = false)
-    private String name;
+    private String name = "FaBan";
 
 }

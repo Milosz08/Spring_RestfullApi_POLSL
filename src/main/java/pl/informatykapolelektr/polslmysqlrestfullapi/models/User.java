@@ -44,15 +44,27 @@ public class User extends AuditModel {
     @Column(name = "user_role", unique = true)
     private int role = 0;
 
-    @NotNull(message = "Username field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za nazwę użytkownika")
+    @Size(
+        min = 5, max = 20,
+        message = "Nazwa użytkownika nie mieści się w zakresie od 5 do 20 znaków"
+    )
     @Column(name = "user_name", nullable = false)
     private String username;
 
-    @NotNull(message = "Password field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za hasło użytkownika")
+    @Size(
+        min = 5, max = 30,
+        message = "Hasło użytkownika nie mieści się w zakresie od 5 do 20 znaków"
+    )
     @Column(name = "user_password", nullable = false)
     private String password;
 
-    @NotNull(message = "Token field shouldn't be null type!")
+    @NotNull(message = "Brak/puste pole odpowiadające za token administratora")
+    @Size(
+        max = 30,
+        message = "Token administratora nie może przekraczać 30 znaków"
+    )
     @Column(name = "user_token", nullable = false)
     private String token;
 

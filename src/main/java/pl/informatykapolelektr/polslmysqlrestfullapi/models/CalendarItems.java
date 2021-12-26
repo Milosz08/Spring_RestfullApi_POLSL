@@ -39,13 +39,19 @@ public class CalendarItems extends AuditModel {
     @Column(name = "calendar_item_id")
     private String _id;
 
-    @NotNull(message = "Start time field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za rozpoczęcie aktywności wydarzenia kalendarza")
     @Column(name = "start_time")
-    @Size(min = 5, max = 5, message = "Start time must have 5 characters in format: 'HH:mm'!")
+    @Pattern(
+        regexp = "/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/",
+        message = "Pole czasu rozpoczęcia aktywności nie jest w formacie HH:mm"
+    )
     private String start;
 
-    @NotNull(message = "Message field shouldn't be null type!")
-    @Size(min = 10, max = 80, message = "Calendar item message must have from 10 to 80 characters!")
+    @NotNull(message = "Brak/puste pole odpowiadające za wiadomość o aktywności wydarzenia kalendarza")
+    @Size(
+        min = 10, max = 80,
+        message = "Pole wiadomości o aktywności wydarzenia nie mieści się w przedziale od 10 do 80 znaków"
+    )
     @Column(name = "calendar_item_message")
     private String message;
 

@@ -37,12 +37,15 @@ public class Semester extends AuditModel {
     @JsonIgnore
     private String _id;
 
-    @NotNull(message = "Semester number field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za numer semestru")
     @Column(name = "sem_number", nullable = false)
     private int identity;
 
-    @NotNull(message = "Semester name field shouldn't be null type!")
-    @Size(min = 3, max = 20, message = "Semester name field should have from 3 to 20 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za nazwę semestru")
+    @Size(
+        min = 3, max = 20,
+        message = "Pole odpowiadające za nazwę semestru nie mieści się w zakresie od 3 do 20 znaków"
+    )
     @Column(name = "sem_name", nullable = false)
     private String name;
 

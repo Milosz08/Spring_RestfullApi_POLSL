@@ -38,18 +38,23 @@ public class Department extends AuditModel {
     @JsonIgnore
     private String _id;
 
-    @NotNull(message = "Department name field shouldn't be null type!")
-    @Size(min = 3, max = 50, message = "Department name should have from 3 to 50 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za nazwę wydziału")
+    @Size(
+        min = 3, max = 50,
+        message = "Pole opisujące tytuł wydziału powinno mieć od 3 do 50 znaków"
+    )
     @Column(name = "dept_name", nullable = false)
     private String title;
 
-    @NotNull(message = "Department short name field shouldn't be null type!")
-    @Size(min = 2, message = "Department name should have at least of 2 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za skrót nazwy wydziału")
     @Column(name = "dept_short", nullable = false)
     private String shortName;
 
-    @NotNull(message = "Department link field shouldn't be null type!")
-    @Size(min = 10, message = "Department link should have at least of 10 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za link wydziału do platformy")
+    @Size(
+        min = 10,
+        message = "Pole zawierające link do platformy powinno mieć co najmniej 10 znaków"
+    )
     @Column(name = "dept_link", nullable = false)
     private String link;
 

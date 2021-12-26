@@ -41,18 +41,20 @@ public class Subject extends AuditModel {
     @Column(name = "subject_id")
     private String _id;
 
-    @NotNull(message = "Subject title field shouldn't be null type!")
-    @Size(min = 3, max = 50, message = "Subject title should have from 3 to 50 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za tytuł przedmiotu")
+    @Size(
+        min = 3, max = 50,
+        message = "Pole opisujące tytuł przedmiotu nie mieści się w zakresie od 3 do 50 znaków"
+    )
     @Column(name = "subject_title", nullable = false)
     private String title;
 
-    @NotNull(message = "Subject status flag field shouldn't be null type!")
     @Column(name = "subject_status", nullable = false)
-    private boolean ifEnd;
+    private boolean ifEnd = false;
 
     @OneToOne(targetEntity = Icon.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "icon_bind", referencedColumnName = "icon_id")
-    @NotNull(message = "Subject must have single icon field properties!")
+    @NotNull(message = "Przedmiot musi mieć obiekt opisujący ikonę")
     private Icon icon;
 
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -61,6 +63,7 @@ public class Subject extends AuditModel {
         joinColumns = @JoinColumn(name = "subject_id"),
         inverseJoinColumns = @JoinColumn(name = "semester_id", referencedColumnName = "sem_id")
     )
+    @NotNull(message = "Przedmiot musi mieć przynajmniej jeden obiekt opisujący semestr")
     private Set<Semester> semesters = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -69,6 +72,7 @@ public class Subject extends AuditModel {
         joinColumns = @JoinColumn(name = "subject_id"),
         inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "dept_id")
     )
+    @NotNull(message = "Przedmiot musi mieć przynajmniej jeden obiekt opisujący wydział")
     private Set<Department> departments = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -77,6 +81,7 @@ public class Subject extends AuditModel {
         joinColumns = @JoinColumn(name = "subject_id"),
         inverseJoinColumns = @JoinColumn(name = "classes_id")
     )
+    @NotNull(message = "Przedmiot musi mieć przynajmniej jeden obiekt opisujący miejsce i typ zajęć")
     private Set<ClassesItem> classesPlatform = new HashSet<>();
 
 }

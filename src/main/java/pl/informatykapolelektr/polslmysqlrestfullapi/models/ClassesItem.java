@@ -38,18 +38,27 @@ public class ClassesItem extends AuditModel {
     @JsonIgnore
     private String _id;
 
-    @NotNull(message = "Classes type field shouldn't be null type!")
-    @Size(min = 3, max = 50, message = "Classes type field should have from 3 to 50 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za typ zajęć")
+    @Size(
+        min = 3, max = 50,
+        message = "Pole typu zajęć nie mieści się w przedziale od 3 do 50 znaków"
+    )
     @Column(name = "classes_type", nullable = false)
     private String type;
 
-    @NotNull(message = "Classes place field shouldn't be null type!")
-    @Size(min = 3, max = 20, message = "Classes place field should have at least of 3 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za miejsce odbywania zajęć")
+    @Size(
+        min = 3, max = 20,
+        message = "Pole miejsca odbywania zajęć nie mieści się w przedziale od 3 do 20 znaków"
+    )
     @Column(name = "classes_place", nullable = false)
     private String place;
 
-    @NotNull(message = "Classes type field shouldn't be null type!")
-    @Size(min = 3, max = 500, message = "Classes link field should have at least of 3 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za link do platformy zajęć")
+    @Size(
+        min = 3, max = 500,
+        message = "Pole linku platformy powinno zawierać przynajmniej 3 znaki"
+    )
     @Column(name = "classes_link", nullable = false)
     private String link;
 

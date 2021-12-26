@@ -39,12 +39,15 @@ public class Covid extends AuditModel {
     @Column(name = "covid_id")
     private String _id;
 
-    @NotNull(message = "Covid type field shouldn't be null type!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za miejsce umiejscowienia kafelka zagrożenia COVID")
     @Column(name = "covid_dir", nullable = false)
     private Enums.CovidDataEnums type;
 
-    @NotNull(message = "Covid description field shouldn't be null type!")
-    @Size(min = 10, message = "Covid description field must have at least of 10 characters!")
+    @NotEmpty(message = "Brak/puste pole odpowiadające za wiadomość opisującą zagrożenie COVID")
+    @Size(
+        min = 10,
+        message = "Pole opisujące zagrożenie COVID powinno mieć co najmniej 10 znaków"
+    )
     @Column(name = "covid_descr", nullable = false)
     private String description;
 
