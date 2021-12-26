@@ -27,4 +27,6 @@ public class ServletConfig {
     public static final String HELPER_LINKS = "helpers";
     public static final String LAST_UPDATES = "updates";
     public static final String SUBJECTS = "subjects";
+    public static final String SCHEDULE = "schedule";
+
 }
