@@ -16,6 +16,7 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.models;
 
 import lombok.*;
 import org.hibernate.annotations.*;
+import org.springframework.beans.factory.annotation.*;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -49,33 +50,33 @@ public class Subject extends AuditModel {
     @Column(name = "subject_status", nullable = false)
     private boolean ifEnd;
 
-    @ManyToMany()
-    @JoinTable(
-        name = "subject_semesters",
-        joinColumns = @JoinColumn(name = "subject_id"),
-        inverseJoinColumns = @JoinColumn(name = "semester_id", referencedColumnName = "sem_id")
-    )
-    private Set<Semester> semesters;
-
-    @ManyToMany()
-    @JoinTable(
-        name = "subject_deptartments",
-        joinColumns = @JoinColumn(name = "subject_id"),
-        inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "dept_id")
-    )
-    private Set<Department> departments;
-
     @OneToOne(targetEntity = Icon.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "icon_bind", referencedColumnName = "icon_id")
     @NotNull(message = "Subject must have single icon field properties!")
     private Icon icon;
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+        name = "subject_semesters",
+        joinColumns = @JoinColumn(name = "subject_id"),
+        inverseJoinColumns = @JoinColumn(name = "semester_id", referencedColumnName = "sem_id")
+    )
+    private Set<Semester> semesters = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+        name = "subject_departments",
+        joinColumns = @JoinColumn(name = "subject_id"),
+        inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "dept_id")
+    )
+    private Set<Department> departments = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
         name = "subject_classes",
         joinColumns = @JoinColumn(name = "subject_id"),
-        inverseJoinColumns = @JoinColumn(name = "classes_id", referencedColumnName = "classes_id")
+        inverseJoinColumns = @JoinColumn(name = "classes_id")
     )
-    private Set<ClassesItem> classesPlatform;
+    private Set<ClassesItem> classesPlatform = new HashSet<>();
 
 }
