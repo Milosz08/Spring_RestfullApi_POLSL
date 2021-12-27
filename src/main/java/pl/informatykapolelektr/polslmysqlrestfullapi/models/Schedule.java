@@ -75,9 +75,6 @@ public class Schedule extends AuditModel {
     @Column(name = "schedule_subject_end", nullable = false)
     private String endHour;
 
-    @Column(name = "schedule_subject_type", nullable = false)
-    private String type;
-
     @NotEmpty(message = "Brak/puste pole odpowiadające za pokój odbywanych zajęć")
     @Size(
         min = 2, max = 10,
@@ -86,11 +83,9 @@ public class Schedule extends AuditModel {
     @Column(name = "schedule_subject_room", nullable = false)
     private String room;
 
-    @Column(name = "schedule_subject_place", nullable = false)
-    private String place;
-
-    @Column(name = "schedule_subject_link", nullable = false)
-    private String link;
+    @OneToOne(targetEntity = ClassesItem.class, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "classes_bind", referencedColumnName = "classes_id")
+    private ClassesItem classesInfo = new ClassesItem();
 
     @OneToOne(targetEntity = Icon.class, cascade = CascadeType.MERGE)
     @JoinColumn(name = "icon_bind", referencedColumnName = "icon_id")

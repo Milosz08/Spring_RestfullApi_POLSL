@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.service.implementation;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.parameters.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -33,6 +34,8 @@ public class ScheduleServiceImplementation implements ScheduleService {
     private SubjectRepository subjectRepository;
     @Autowired
     private IconRepository iconRepository;
+    @Autowired
+    private ClassesItemRepository classesItemRepository;
 
     private void checkDayIsValid(Schedule schedule) {
         if (schedule.getDay() > 6 || schedule.getDay() < 0) {
@@ -62,11 +65,13 @@ public class ScheduleServiceImplementation implements ScheduleService {
                 .findFirst();
             if (findItem.isPresent()) {
                 ClassesItem itemGet = findItem.get();
-                schedule.setType(
-                        itemGet.getType().toLowerCase().equals("wszystkie zajęcia") ? type : itemGet.getType()
+                ClassesItem scheduleCl = schedule.getClassesInfo();
+                scheduleCl.setType(
+                    itemGet.getType().toLowerCase().equals("wszystkie zajęcia") ? type : itemGet.getType()
                 );
-                schedule.setPlace(itemGet.getPlace());
-                schedule.setLink(itemGet.getLink());
+                scheduleCl.setPlace(itemGet.getPlace());
+                scheduleCl.setLink(itemGet.getLink());
+                scheduleCl.set_id(findItem.get().get_id());
                 insertAdditionalIcon(schedule, findSubject.get().getIcon(), findSubject.get());
                 scheduleRepository.save(schedule);
                 return schedule;
@@ -115,7 +120,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
         Optional<Schedule> findScheduleSubject = scheduleRepository.findById(id);
         if (findScheduleSubject.isPresent()) {
             schedule.set_id(id);
-            return addOrUpdate(schedule, findScheduleSubject.get().getType());
+            return addOrUpdate(schedule, findScheduleSubject.get().getClassesInfo().getType());
         }
         throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }
