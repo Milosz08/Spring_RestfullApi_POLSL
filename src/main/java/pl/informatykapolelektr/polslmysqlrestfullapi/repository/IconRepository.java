@@ -15,9 +15,16 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import java.util.*;
+
 @Repository
 public interface IconRepository extends JpaRepository<Icon, String> {
+
+    @Query("SELECT i FROM Icon i WHERE i.family=:f AND i.name=:n")
+    List<Icon> getIconsByNameAndFamily(@Param("f") String family, @Param("n") String name);
+
 }
