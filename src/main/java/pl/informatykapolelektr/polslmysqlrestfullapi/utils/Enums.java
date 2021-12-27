@@ -37,7 +37,7 @@ public class Enums {
      * part -> see, ReactJS repository: https://github.com/Milosz08/ReactJS_Web_Application_POLSL).
      */
     public enum UserMessChoices {
-        OPTION_DISABLED, PAGE_ERROR, SHEDULE_MODIFY, CALENDAR_NEW_DATE, DEFAULT
+        OPTION_DISABLED, PAGE_ERROR, SCHEDULE_MODIFY, CALENDAR_NEW_DATE, DEFAULT
     }
 
     /**
