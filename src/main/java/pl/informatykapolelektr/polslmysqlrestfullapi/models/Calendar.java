@@ -43,15 +43,15 @@ public class Calendar extends AuditModel {
     @Column(name = "calendar_id")
     private String _id;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za dzień aktywności kalendarza")
+    @NotNull(message = "Brak/puste pole odpowiadające za dzień aktywności kalendarza")
     @Column(name = "calendar_day", nullable = false)
     private int day;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za miesiąc aktywności kalendarza")
+    @NotNull(message = "Brak/puste pole odpowiadające za miesiąc aktywności kalendarza")
     @Column(name = "calendar_moth", nullable = false)
     private int month;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za rok aktywności kalendarza")
+    @NotNull(message = "Brak/puste pole odpowiadające za rok aktywności kalendarza")
     @Column(name = "calendar_year", nullable = false)
     private int year;
 
