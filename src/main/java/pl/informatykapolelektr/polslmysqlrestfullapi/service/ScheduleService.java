@@ -24,7 +24,7 @@ public interface ScheduleService {
     List<Schedule> getAllScheduleByDay(int day);
     Schedule getSingleScheduleSubject(String id);
     Schedule addScheduleSubject(Schedule schedule, String type);
-    Schedule editScheduleSubject(String idS, Schedule schedule);
+    Schedule editScheduleSubject(String id, String type, Schedule schedule);
     void deleteSingleScheduleSubject(String id);
     void deleteAllScheduleSubjects();
 

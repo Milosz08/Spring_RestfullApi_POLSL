@@ -56,9 +56,11 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleService.addScheduleSubject(schedule, type), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Schedule> editScheduleSubject(@PathVariable String id, @Valid @RequestBody Schedule schedule) {
-        return new ResponseEntity<>(scheduleService.editScheduleSubject(id, schedule), HttpStatus.OK);
+    @PutMapping("/{id}/{type}")
+    public ResponseEntity<Schedule> editScheduleSubject(
+            @PathVariable String id, @PathVariable String type, @Valid @RequestBody Schedule schedule
+    ) {
+        return new ResponseEntity<>(scheduleService.editScheduleSubject(id, type, schedule), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
