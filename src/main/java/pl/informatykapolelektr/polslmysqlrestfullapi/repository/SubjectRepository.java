@@ -27,4 +27,7 @@ public interface SubjectRepository extends JpaRepository<Subject, String> {
     @Query("SELECT s FROM Subject s WHERE s.title=:t")
     Optional<Subject> findSubjectByTitle(@Param("t") String title);
 
+    @Query("SELECT s.updatedAt FROM Subject s ORDER BY s.updatedAt")
+    List<Date> findLastEditField();
+
 }

@@ -37,6 +37,10 @@ public class LastUpdateServiceImplementation implements LastUpdateService {
     private UserMessageRepository userMessageRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
     private Map<String, Object> singleRepoDateElement(List<Date> dates, Enums.AllUpdateTypes type) {
         String date = ServletTime.formattingDate(dates);
@@ -51,6 +55,8 @@ public class LastUpdateServiceImplementation implements LastUpdateService {
         returned.add(singleRepoDateElement(helperLinkRepository.findLastEditField(), Enums.AllUpdateTypes.HELPERS));
         returned.add(singleRepoDateElement(userMessageRepository.findLastEditField(), Enums.AllUpdateTypes.USER_MESS));
         returned.add(singleRepoDateElement(userRepository.findLastEditField(), Enums.AllUpdateTypes.AUTH));
+        returned.add(singleRepoDateElement(subjectRepository.findLastEditField(), Enums.AllUpdateTypes.SUBJECTS));
+        returned.add(singleRepoDateElement(scheduleRepository.findLastEditField(), Enums.AllUpdateTypes.SCHEDULE));
         return returned;
     }
 
@@ -72,6 +78,13 @@ public class LastUpdateServiceImplementation implements LastUpdateService {
                 break;
             case AUTH:
                 date = ServletTime.formattingDate(userRepository.findLastEditField());
+                break;
+            case SUBJECTS:
+                date = ServletTime.formattingDate(subjectRepository.findLastEditField());
+                break;
+            case SCHEDULE:
+                date = ServletTime.formattingDate(scheduleRepository.findLastEditField());
+                break;
             default:
                 throw new ApiRequestException("Podany typ: '" + type + "' nie istenie w obsługiwanej encji");
         }

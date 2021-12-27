@@ -36,4 +36,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, String> {
     @Query("DELETE FROM Schedule s WHERE s.title=:t")
     void deleteAllScheduleSubjectsByTitle(@Param("t") String title);
 
+    @Query("SELECT s.updatedAt FROM Schedule s ORDER BY s.updatedAt")
+    List<Date> findLastEditField();
+
 }
