@@ -39,8 +39,8 @@ public class CalendarServiceImplementation implements CalendarService {
             item.set_id(new RandomHexGenerator().generateSequence());
         }
         calendar.setDateString(
-            calendar.getYear() + "/" +
-            ServletTime.insertZeros(calendar.getMonth()) + "/" + ServletTime.insertZeros(calendar.getDay())
+            calendar.getYear() + "-" +
+            ServletTime.insertZeros(calendar.getMonth()) + "-" + ServletTime.insertZeros(calendar.getDay())
         );
         calendarRepository.save(calendar);
         calendarItemsRepository.saveAll(calendar.getItems());
@@ -49,7 +49,16 @@ public class CalendarServiceImplementation implements CalendarService {
 
     @Override
     public List<Calendar> getAllCalendars() {
-        return calendarRepository.findAll();
+        List<Calendar> beforeSorting = calendarRepository.findAll();
+        Collections.sort(beforeSorting, new Comparator<Calendar>() {
+            @Override
+            public int compare(Calendar o1, Calendar o2) {
+                Date firstDate = new GregorianCalendar(o1.getYear(), o1.getMonth() - 1, o1.getDay()).getTime();
+                Date secondDate = new GregorianCalendar(o2.getYear(), o2.getMonth() - 1, o2.getDay()).getTime();
+                return firstDate.compareTo(secondDate);
+            }
+        });
+        return beforeSorting;
     }
 
     @Override
