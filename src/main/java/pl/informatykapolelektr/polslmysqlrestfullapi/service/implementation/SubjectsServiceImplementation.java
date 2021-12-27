@@ -47,15 +47,37 @@ public class SubjectsServiceImplementation implements SubjectService {
         return subject;
     }
 
+    private List<Semester> sortSemesters(Subject subject) {
+        List<Semester> beforeSorting = subject.getSemesters();
+        Collections.sort(beforeSorting, new Comparator<Semester>() {
+            @Override
+            public int compare(Semester o1, Semester o2) {
+                return o1.getIdentity() - o2.getIdentity();
+            }
+        });
+        return beforeSorting;
+    }
+
     @Override
     public List<Subject> getAllSubjects() {
-        return subjectRepository.findAll();
+        List<Subject> beforeSorted = subjectRepository.findAll();
+        Collections.sort(beforeSorted, new Comparator<Subject>() {
+            @Override
+            public int compare(Subject o1, Subject o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        });
+        for(Subject subject : beforeSorted) {
+            subject.setSemesters(sortSemesters(subject));
+        }
+        return beforeSorted;
     }
 
     @Override
     public Subject getSingleSubject(String id) {
         Optional<Subject> subjectFind = subjectRepository.findById(id);
         if (subjectFind.isPresent()) {
+            subjectFind.get().setSemesters(sortSemesters(subjectFind.get()));
             return subjectFind.get();
         }
         throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
@@ -73,7 +95,7 @@ public class SubjectsServiceImplementation implements SubjectService {
             subject.set_id(id);
             if (!subjectFind.get().getTitle().equals(subject.getTitle())) {
                 Optional<Schedule> scheduleSubjectFind = scheduleRepository.getScheduleSubjectByTitle(
-                    subjectFind.get().getTitle()
+                        subjectFind.get().getTitle()
                 );
                 if (scheduleSubjectFind.isPresent()) {
                     scheduleSubjectFind.get().setTitle(subject.getTitle());
