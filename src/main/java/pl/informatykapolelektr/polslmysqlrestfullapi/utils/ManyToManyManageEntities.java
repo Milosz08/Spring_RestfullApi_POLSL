@@ -21,10 +21,10 @@ import java.util.*;
 
 public class ManyToManyManageEntities<T> {
 
-    private final Set<T> elementToFind;
+    private final List<T> elementToFind;
     private final Callback<T> callback;
 
-    public ManyToManyManageEntities(Set<T> elementToFind, Callback<T> callback) {
+    public ManyToManyManageEntities(List<T> elementToFind, Callback<T> callback) {
         this.elementToFind = elementToFind;
         this.callback = callback;
     }
@@ -77,7 +77,7 @@ public class ManyToManyManageEntities<T> {
     }
 
     public static void addOrUpdateClassesItems(Subject subject, ClassesItemRepository repo) {
-        new ManyToManyManageEntities<>(subject.getClassesPlatform(), new Callback<>() {
+        new ManyToManyManageEntities<>(subject.getClassesPlatforms(), new Callback<>() {
             @Override
             public List<ClassesItem> findElement(ClassesItem entity) {
                 return repo.getClassesItemBy(entity.getType(), entity.getPlace(), entity.getLink());
