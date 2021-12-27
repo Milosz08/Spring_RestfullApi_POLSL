@@ -74,11 +74,6 @@ public class Schedule extends AuditModel {
     @Column(name = "schedule_subject_end", nullable = false)
     private String endHour;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za typ odbywanych zajęć")
-    @Size(
-        min = 3, max = 20,
-        message = "Pole odpowiadające za typ zajęć nie mieści się w zakresie od 3 do 20 znaków"
-    )
     @Column(name = "schedule_subject_type", nullable = false)
     private String type;
 
@@ -90,19 +85,9 @@ public class Schedule extends AuditModel {
     @Column(name = "schedule_subject_room", nullable = false)
     private String room;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za miejsce odbywanych zajęć")
-    @Size(
-        min = 5, max = 50,
-        message = "Pole odpowiadające za miejsce odbywanych zajęć nie mieści się w zakresie od 5 do 50 znaków"
-    )
     @Column(name = "schedule_subject_place", nullable = false)
     private String place;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za link do platformy")
-    @Size(
-        min = 5, max = 500,
-        message = "Pole odpowiadające za link do platformy nie mieści się w zakresie od 5 do 500 znaków"
-    )
     @Column(name = "schedule_subject_link", nullable = false)
     private String link;
 
