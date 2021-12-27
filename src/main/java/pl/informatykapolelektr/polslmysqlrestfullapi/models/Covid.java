@@ -39,7 +39,7 @@ public class Covid extends AuditModel {
     @Column(name = "covid_id")
     private String _id;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za miejsce umiejscowienia kafelka zagrożenia COVID")
+    @NotNull(message = "Brak/puste pole odpowiadające za miejsce umiejscowienia kafelka zagrożenia COVID")
     @Column(name = "covid_dir", nullable = false)
     private Enums.CovidDataEnums type;
 
