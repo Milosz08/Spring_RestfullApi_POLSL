@@ -58,7 +58,7 @@ public class SubjectsServiceImplementation implements SubjectService {
         if (subjectFind.isPresent()) {
             return subjectFind.get();
         }
-        throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override
@@ -87,7 +87,7 @@ public class SubjectsServiceImplementation implements SubjectService {
             }
             return addOrUpdate(subject);
         }
-        throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override

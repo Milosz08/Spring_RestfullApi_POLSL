@@ -47,7 +47,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
         if(findScheduleSubject.isPresent()) {
             return findScheduleSubject.get();
         }
-        throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
             scheduleRepository.save(schedule);
             return schedule;
         }
-        throw new ApiRequestException("Przedmiot o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override
