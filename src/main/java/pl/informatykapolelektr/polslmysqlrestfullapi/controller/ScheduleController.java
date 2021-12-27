@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
 import org.springframework.http.*;
+import org.springframework.security.core.parameters.*;
 import org.springframework.web.bind.annotation.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -26,6 +27,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + SCHEDULE)
+@CrossOrigin
 public class ScheduleController {
 
     private final ScheduleService scheduleService;

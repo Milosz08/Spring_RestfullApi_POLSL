@@ -25,6 +25,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + USER_MESSAGES)
+@CrossOrigin
 public class UserMessageController {
 
     private final UserMessageService userMessageService;

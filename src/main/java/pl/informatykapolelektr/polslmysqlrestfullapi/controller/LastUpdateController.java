@@ -25,6 +25,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + LAST_UPDATES)
+@CrossOrigin
 public class LastUpdateController {
 
     private final LastUpdateService lastUpdateService;

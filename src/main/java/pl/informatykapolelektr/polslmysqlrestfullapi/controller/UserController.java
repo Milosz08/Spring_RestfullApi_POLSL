@@ -28,6 +28,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping(DEF_PREFIX + CREDENTIALS)
+@CrossOrigin
 public class UserController {
 
     private final UserService usersService;

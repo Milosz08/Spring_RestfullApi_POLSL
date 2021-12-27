@@ -26,6 +26,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + CALENDAR)
+@CrossOrigin
 public class CalendarController {
 
     private final CalendarService calendarService;

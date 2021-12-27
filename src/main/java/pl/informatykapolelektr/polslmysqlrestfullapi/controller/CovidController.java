@@ -27,6 +27,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + COVID)
+@CrossOrigin
 public class CovidController {
 
     private final CovidService covidService;

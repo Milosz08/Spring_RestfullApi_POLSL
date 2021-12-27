@@ -26,6 +26,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + HELPER_LINKS)
+@CrossOrigin
 public class HelperLinkController {
 
     private final HelperLinkService helperLinkService;

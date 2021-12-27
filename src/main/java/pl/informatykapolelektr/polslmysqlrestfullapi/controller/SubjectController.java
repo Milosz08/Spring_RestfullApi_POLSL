@@ -26,6 +26,7 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 
 @RestController
 @RequestMapping(DEF_PREFIX + SUBJECTS)
+@CrossOrigin
 public class SubjectController {
 
     private final SubjectService subjectService;
