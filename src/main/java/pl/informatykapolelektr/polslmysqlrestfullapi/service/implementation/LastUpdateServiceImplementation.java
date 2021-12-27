@@ -73,7 +73,7 @@ public class LastUpdateServiceImplementation implements LastUpdateService {
             case AUTH:
                 date = ServletTime.formattingDate(userRepository.findLastEditField());
             default:
-                throw new ApiRequestException("Podany typ: " + type + " nie istenie w obsługiwanej encji!");
+                throw new ApiRequestException("Podany typ: '" + type + "' nie istenie w obsługiwanej encji");
         }
         return ReturnedJsonContent.returnedUpdatedDateContent(type, date);
     }

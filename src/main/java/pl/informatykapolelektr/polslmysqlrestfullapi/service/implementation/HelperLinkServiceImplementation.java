@@ -51,7 +51,7 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
         if(helperLinkFind.isPresent()) {
             return helperLinkFind.get();
         }
-        throw new ApiRequestException("Link pomocy o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Link pomocy o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override
@@ -66,7 +66,7 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
         if (helperLinkFind.isPresent()) {
             return addOrUpdate(helperLink);
         }
-        throw new ApiRequestException("Link pomocy o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Link pomocy o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override

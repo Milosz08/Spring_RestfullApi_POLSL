@@ -49,7 +49,7 @@ public class UserServiceImplementation implements UserService {
         if(user.isPresent()) {
             return user.get();
         }
-        throw new ApiRequestException("Użytkownik z rolą: " + role + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Użytkownik z rolą: '" + role + "' nie znajduje się w bazie danych");
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImplementation implements UserService {
             user.set_id(userUpdate.get().get_id());
             return usersRepository.save(encodeFields(user));
         }
-        throw new ApiRequestException("Użytkownik z rolą: " + role + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Użytkownik z rolą: '" + role + "' nie znajduje się w bazie danych");
     }
 
     private User encodeFields(User user) {

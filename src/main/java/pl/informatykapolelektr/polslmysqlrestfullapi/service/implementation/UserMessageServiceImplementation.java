@@ -50,7 +50,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
             updateUserMessage.get().setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
             return userMessageRepository.save(updateUserMessage.get());
         }
-        throw new ApiRequestException("Wiadomość o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Wiadomość o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override

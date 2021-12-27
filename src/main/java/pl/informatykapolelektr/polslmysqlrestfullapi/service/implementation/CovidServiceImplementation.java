@@ -47,7 +47,7 @@ public class CovidServiceImplementation implements CovidService {
             covid.set_id(covidUpdate.get().get_id());
             return covidRepository.save(covid);
         }
-        throw new ApiRequestException("Element o typie: " + type + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Element o typie: '" + type + "' nie znajduje się w bazie danych");
     }
 
 }

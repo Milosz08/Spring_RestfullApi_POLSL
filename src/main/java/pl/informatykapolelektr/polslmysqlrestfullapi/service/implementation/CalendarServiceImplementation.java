@@ -58,7 +58,7 @@ public class CalendarServiceImplementation implements CalendarService {
         if (calendar.isPresent()) {
             return calendar.get();
         }
-        throw new ApiRequestException("Zawartość kalendarza o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Zawartość kalendarza o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CalendarServiceImplementation implements CalendarService {
         if (calendarFind.isPresent()) {
             return addOrUpdate(calendar);
         }
-        throw new ApiRequestException("Zawartość kalendarza o ID: " + id + " nie znajduje się w bazie danych!");
+        throw new ApiRequestException("Zawartość kalendarza o ID: '" + id + "' nie znajduje się w bazie danych");
     }
 
     @Override
