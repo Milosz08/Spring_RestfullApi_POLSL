@@ -64,7 +64,7 @@ public class Subject extends AuditModel {
         inverseJoinColumns = @JoinColumn(name = "semester_id", referencedColumnName = "sem_id")
     )
     @NotNull(message = "Przedmiot musi mieć przynajmniej jeden obiekt opisujący semestr")
-    private Set<Semester> semesters = new HashSet<>();
+    private List<Semester> semesters = new LinkedList<>();
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
@@ -73,7 +73,7 @@ public class Subject extends AuditModel {
         inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "dept_id")
     )
     @NotNull(message = "Przedmiot musi mieć przynajmniej jeden obiekt opisujący wydział")
-    private Set<Department> departments = new HashSet<>();
+    private List<Department> departments = new LinkedList<>();
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
@@ -82,6 +82,6 @@ public class Subject extends AuditModel {
         inverseJoinColumns = @JoinColumn(name = "classes_id")
     )
     @NotNull(message = "Przedmiot musi mieć przynajmniej jeden obiekt opisujący miejsce i typ zajęć")
-    private Set<ClassesItem> classesPlatform = new HashSet<>();
+    private List<ClassesItem> classesPlatforms = new LinkedList<>();
 
 }
