@@ -20,6 +20,7 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
 import java.util.*;
 
@@ -106,7 +107,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
         if(findSubject.isPresent()) {
             return addOrUpdate(schedule, type);
         }
-        throw new ApiRequestException("Próba dodania przedmiotu nieznajdującego się w bazie danych!");
+        throw new ApiRequestException("Przedmiot o tytule '" + schedule.getTitle() + "' nie istenieje w tabeli nadrzędnej");
     }
 
     @Override
