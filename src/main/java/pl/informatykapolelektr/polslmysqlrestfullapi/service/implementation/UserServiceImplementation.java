@@ -46,7 +46,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User getSingleUser(int role) {
         Optional<User> user = usersRepository.findByRole(role);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             return user.get();
         }
         throw new ApiRequestException("Użytkownik z rolą: '" + role + "' nie znajduje się w bazie danych");
@@ -60,7 +60,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User editUser(int role, User user) {
         Optional<User> userUpdate = usersRepository.findByRole(role);
-        if(userUpdate.isPresent()) {
+        if (userUpdate.isPresent()) {
             user.set_id(userUpdate.get().get_id());
             return usersRepository.save(encodeFields(user));
         }

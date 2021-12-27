@@ -48,7 +48,7 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
     @Override
     public HelperLink getSingleHelperLink(String id) {
         Optional<HelperLink> helperLinkFind = helperLinkRepository.findById(id);
-        if(helperLinkFind.isPresent()) {
+        if (helperLinkFind.isPresent()) {
             return helperLinkFind.get();
         }
         throw new ApiRequestException("Link pomocy o ID: '" + id + "' nie znajduje się w bazie danych");

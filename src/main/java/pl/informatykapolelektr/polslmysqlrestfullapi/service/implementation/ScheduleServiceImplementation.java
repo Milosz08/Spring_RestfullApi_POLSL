@@ -35,7 +35,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     private IconRepository iconRepository;
 
     private void checkDayIsValid(Schedule schedule) {
-        if(schedule.getDay() > 6 || schedule.getDay() < 0) {
+        if (schedule.getDay() > 6 || schedule.getDay() < 0) {
             throw new ApiRequestException("Błędny numer dnia: '" + schedule.getDay() + "'");
         }
     }
@@ -43,7 +43,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     private void insertAdditionalIcon(Schedule schedule, Icon icon, Subject subject) {
         List<Icon> findIcons = iconRepository.getIconsByNameAndFamily(icon.getFamily(), icon.getName());
         schedule.setIcon(subject.getIcon());
-        if(findIcons.isEmpty()) {
+        if (findIcons.isEmpty()) {
             schedule.getIcon().set_id(new RandomHexGenerator().generateSequence());
             iconRepository.save(schedule.getIcon());
         } else {
@@ -53,17 +53,17 @@ public class ScheduleServiceImplementation implements ScheduleService {
 
     private Schedule fillObjectWithAdditionalValues(Schedule schedule, String type) {
         Optional<Subject> findSubject = subjectRepository.findSubjectByTitle(schedule.getTitle());
-        if(findSubject.isPresent()) {
+        if (findSubject.isPresent()) {
             Optional<ClassesItem> findItem = findSubject.get().getClassesPlatform()
                 .stream().filter(item -> (
                     item.getType().toLowerCase().equals(type.toLowerCase()) ||
                     item.getType().toLowerCase().equals("wszystkie zajęcia"))
                 )
                 .findFirst();
-            if(findItem.isPresent()) {
+            if (findItem.isPresent()) {
                 ClassesItem itemGet = findItem.get();
                 schedule.setType(
-                    itemGet.getType().toLowerCase().equals("wszystkie zajęcia") ? type : itemGet.getType()
+                        itemGet.getType().toLowerCase().equals("wszystkie zajęcia") ? type : itemGet.getType()
                 );
                 schedule.setPlace(itemGet.getPlace());
                 schedule.setLink(itemGet.getLink());
@@ -95,7 +95,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     @Override
     public Schedule getSingleScheduleSubject(String id) {
         Optional<Schedule> findScheduleSubject = scheduleRepository.findById(id);
-        if(findScheduleSubject.isPresent()) {
+        if (findScheduleSubject.isPresent()) {
             return findScheduleSubject.get();
         }
         throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
@@ -104,7 +104,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     @Override
     public Schedule addScheduleSubject(Schedule schedule, String type) {
         Optional<Subject> findSubject = subjectRepository.findSubjectByTitle(schedule.getTitle());
-        if(findSubject.isPresent()) {
+        if (findSubject.isPresent()) {
             return addOrUpdate(schedule, type);
         }
         throw new ApiRequestException("Przedmiot o tytule '" + schedule.getTitle() + "' nie istenieje w tabeli nadrzędnej");
@@ -113,7 +113,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     @Override
     public Schedule editScheduleSubject(String id, Schedule schedule) {
         Optional<Schedule> findScheduleSubject = scheduleRepository.findById(id);
-        if(findScheduleSubject.isPresent()) {
+        if (findScheduleSubject.isPresent()) {
             schedule.set_id(id);
             return addOrUpdate(schedule, findScheduleSubject.get().getType());
         }

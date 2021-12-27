@@ -27,4 +27,5 @@ public class CustomIDGenerator implements IdentifierGenerator {
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         return new RandomHexGenerator().generateSequence();
     }
+
 }

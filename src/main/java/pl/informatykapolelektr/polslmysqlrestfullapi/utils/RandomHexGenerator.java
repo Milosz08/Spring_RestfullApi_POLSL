@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
 
 import lombok.*;
+
 import java.util.*;
 
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class RandomHexGenerator {
     public String generateSequence() {
         Random r = new Random();
         StringBuilder sb = new StringBuilder();
-        while(sb.length() < sequenceStringCount){
+        while (sb.length() < sequenceStringCount) {
             sb.append(Integer.toHexString(r.nextInt()));
         }
         return sb.substring(0, sequenceStringCount);

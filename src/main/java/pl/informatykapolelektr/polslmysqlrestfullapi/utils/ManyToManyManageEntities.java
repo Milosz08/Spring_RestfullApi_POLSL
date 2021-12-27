@@ -30,9 +30,9 @@ public class ManyToManyManageEntities<T> {
     }
 
     public void manageEntity() {
-        for(T entity : elementToFind) {
+        for (T entity : elementToFind) {
             List<T> findElement = callback.findElement(entity);
-            if(findElement.isEmpty()) {
+            if (findElement.isEmpty()) {
                 callback.actionOnEmpty(entity);
             } else {
                 callback.actionOnNonEmpty(entity, findElement);

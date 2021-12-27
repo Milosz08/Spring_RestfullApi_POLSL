@@ -57,7 +57,7 @@ public class LastUpdateServiceImplementation implements LastUpdateService {
     @Override
     public Map<String, Object> getSingleLastUpdate(Enums.AllUpdateTypes type) {
         String date;
-        switch(type) {
+        switch (type) {
             case CALENDAR:
                 date = ServletTime.formattingDate(calendarRepository.findLastEditField());
                 break;

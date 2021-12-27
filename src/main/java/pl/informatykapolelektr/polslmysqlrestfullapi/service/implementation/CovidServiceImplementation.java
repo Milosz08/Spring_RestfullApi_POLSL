@@ -43,7 +43,7 @@ public class CovidServiceImplementation implements CovidService {
     @Override
     public Covid editCovidData(Enums.CovidDataEnums type, Covid covid) {
         Optional<Covid> covidUpdate = covidRepository.findByType(type);
-        if(covidUpdate.isPresent()) {
+        if (covidUpdate.isPresent()) {
             covid.set_id(covidUpdate.get().get_id());
             return covidRepository.save(covid);
         }

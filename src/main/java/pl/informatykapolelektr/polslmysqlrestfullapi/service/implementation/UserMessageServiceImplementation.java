@@ -45,7 +45,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
     @Override
     public UserMessage editUserMessage(String id) {
         Optional<UserMessage> updateUserMessage = userMessageRepository.findById(id);
-        if(updateUserMessage.isPresent()) {
+        if (updateUserMessage.isPresent()) {
             updateUserMessage.get().setIfClicked(true);
             updateUserMessage.get().setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
             return userMessageRepository.save(updateUserMessage.get());
