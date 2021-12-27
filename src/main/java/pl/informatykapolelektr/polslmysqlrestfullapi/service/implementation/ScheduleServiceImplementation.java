@@ -37,6 +37,8 @@ public class ScheduleServiceImplementation implements ScheduleService {
     @Autowired
     private ClassesItemRepository classesItemRepository;
 
+    private static final String ALL = "wszystkie zajęcia";
+
     private void checkDayIsValid(Schedule schedule) {
         if (schedule.getDay() > 6 || schedule.getDay() < 0) {
             throw new ApiRequestException("Błędny numer dnia: '" + schedule.getDay() + "'");
@@ -54,25 +56,32 @@ public class ScheduleServiceImplementation implements ScheduleService {
         }
     }
 
+    private ClassesItem insertAdditionalClassesInfo(ClassesItem fI, ClassesItem sI, String type) {
+        sI.setType(fI.getType().toLowerCase().equals(ALL) ? type : fI.getType());
+        sI.setPlace(fI.getPlace());
+        sI.setLink(fI.getLink());
+        if (fI.getType().toLowerCase().equals("wszystkie zajęcia")) {
+            List<ClassesItem> findClItem = classesItemRepository.getClassesItemBy(sI.getType(), sI.getPlace(), sI.getLink());
+            if (findClItem.isEmpty()) {
+                sI.set_id(new RandomHexGenerator().generateSequence());
+                classesItemRepository.save(sI);
+            } else {
+                sI.set_id(findClItem.get(0).get_id());
+            }
+        }
+        return sI;
+    }
+
     private Schedule fillObjectWithAdditionalValues(Schedule schedule, String type) {
         Optional<Subject> findSubject = subjectRepository.findSubjectByTitle(schedule.getTitle());
         if (findSubject.isPresent()) {
-            Optional<ClassesItem> findItem = findSubject.get().getClassesPlatform()
-                .stream().filter(item -> (
-                    item.getType().toLowerCase().equals(type.toLowerCase()) ||
-                    item.getType().toLowerCase().equals("wszystkie zajęcia"))
-                )
-                .findFirst();
+            Optional<ClassesItem> findItem = findSubject.get().getClassesPlatforms().stream().filter(item -> (
+                item.getType().toLowerCase().equals(type.toLowerCase()) || item.getType().toLowerCase().equals(ALL))
+            ).findFirst();
             if (findItem.isPresent()) {
-                ClassesItem itemGet = findItem.get();
-                ClassesItem scheduleCl = schedule.getClassesInfo();
-                scheduleCl.setType(
-                    itemGet.getType().toLowerCase().equals("wszystkie zajęcia") ? type : itemGet.getType()
-                );
-                scheduleCl.setPlace(itemGet.getPlace());
-                scheduleCl.setLink(itemGet.getLink());
-                scheduleCl.set_id(findItem.get().get_id());
+                ClassesItem saveItem = insertAdditionalClassesInfo(findItem.get(), schedule.getClassesInfo(), type);
                 insertAdditionalIcon(schedule, findSubject.get().getIcon(), findSubject.get());
+                schedule.setClassesInfo(saveItem);
                 scheduleRepository.save(schedule);
                 return schedule;
             }
@@ -116,11 +125,11 @@ public class ScheduleServiceImplementation implements ScheduleService {
     }
 
     @Override
-    public Schedule editScheduleSubject(String id, Schedule schedule) {
+    public Schedule editScheduleSubject(String id, String type, Schedule schedule) {
         Optional<Schedule> findScheduleSubject = scheduleRepository.findById(id);
         if (findScheduleSubject.isPresent()) {
             schedule.set_id(id);
-            return addOrUpdate(schedule, findScheduleSubject.get().getClassesInfo().getType());
+            return addOrUpdate(schedule, type);
         }
         throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }
