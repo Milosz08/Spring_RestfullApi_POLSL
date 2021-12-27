@@ -37,7 +37,7 @@ public class Semester extends AuditModel {
     @JsonIgnore
     private String _id;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za numer semestru")
+    @NotNull(message = "Brak/puste pole odpowiadające za numer semestru")
     @Column(name = "sem_number", nullable = false)
     private int identity;
 

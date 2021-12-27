@@ -46,7 +46,7 @@ public class Schedule extends AuditModel {
     @Column(name = "schedule_subject_title", nullable = false)
     private String title;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za numer dnia (0-6) przedmiotu w planie zajęć")
+    @NotNull(message = "Brak/puste pole odpowiadające za numer dnia (0-6) przedmiotu w planie zajęć")
     @Column(name = "schedule_subject_day", nullable = false)
     private int day;
 
