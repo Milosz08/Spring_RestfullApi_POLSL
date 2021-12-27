@@ -21,7 +21,7 @@ public class ReturnedJsonContent {
     private static Map<String, Object> generateUpdatedBasicInfo(Enums.AllUpdateTypes type) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("_id", new RandomHexGenerator().generateSequence());
-        body.put("updatedDateFor", type);
+        body.put("updateDateFor", type);
         return body;
     }
 
