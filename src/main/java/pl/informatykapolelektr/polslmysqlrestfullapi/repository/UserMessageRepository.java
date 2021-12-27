@@ -23,7 +23,7 @@ import java.util.*;
 @Repository
 public interface UserMessageRepository extends JpaRepository<UserMessage, String> {
 
-    @Query("SELECT userMessage.updatedAt FROM UserMessage userMessage ORDER BY userMessage.updatedAt")
+    @Query("SELECT u.updatedAt FROM UserMessage u ORDER BY u.updatedAt")
     List<Date> findLastEditField();
 
 }

@@ -23,7 +23,7 @@ import java.util.*;
 @Repository
 public interface HelperLinkRepository extends JpaRepository<HelperLink, String> {
 
-    @Query("SELECT helperLink.updatedAt FROM HelperLink helperLink ORDER BY helperLink.updatedAt")
+    @Query("SELECT h.updatedAt FROM HelperLink h ORDER BY h.updatedAt")
     List<Date> findLastEditField();
 
 }

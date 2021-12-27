@@ -25,7 +25,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findByRole(int role);
 
-    @Query("SELECT user.updatedAt FROM User user ORDER BY user.updatedAt")
+    @Query("SELECT u.updatedAt FROM User u ORDER BY u.updatedAt")
     List<Date> findLastEditField();
 
 }

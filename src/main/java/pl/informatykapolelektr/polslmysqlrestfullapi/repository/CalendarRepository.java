@@ -23,7 +23,7 @@ import java.util.*;
 @Repository
 public interface CalendarRepository extends JpaRepository<Calendar, String> {
 
-    @Query("SELECT calendar.updatedAt FROM Calendar calendar ORDER BY calendar.updatedAt")
+    @Query("SELECT c.updatedAt FROM Calendar c ORDER BY c.updatedAt")
     List<Date> findLastEditField();
 
 }
