@@ -1,22 +1,30 @@
-# Getting Started
+<h1 align="center">
+  RestfullAPI for POLSL Web Application
+  <br>
+  <img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/main-logo.png" width="200">
+  <br>
+</h1>
+<p align="center" style="font-size: 1.2rem;">
+RestAPI created for ReactJS application using Java and Spring Boot framework. To create this programming interface I used JPA and Hibernate to provide a connection between object-oriented programming and storing data as tables in mySQL database.
+</p>
 
-### Reference Documentation
+> See this website at [informatyka-pol-elektr.pl](https://informatyka-pol-elektr.pl/) <br>
+> See Front-end for this website written in ReactJS in my repo: [ReactJS_Web_Application_POLSL](https://github.com/Milosz08/ReactJS_Web_Application_POLSL)
 
-For further reference, please consider the following sections:
+<hr/>
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.1/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.1/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.1/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.6.1/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+## About the Project
+For the back-end of the application written in ReactJS, I decided to use Java Spring Boot because it integrates well with the React environment and is fast compared to other solutions (e.g. PHP). I decided to store the data in the application in the popular relational mySQL database due to the lack of redundancy and consistency of the inserting data.
 
-### Guides
+## Clone and Installation
+If you want to clone and work with this repository, use the built-in interface in your IDE (for example Intelij Idea or Eclipse EE) or use the clone project algorithm with git bash:<br>
+1. Open Git Bash.
+2. Change the current working directory to the location where you want the cloned directory.
+3. Type `git clone` and then paste the URL you copied earlier.
+  
+```
+$ git clone https://github.com/Milosz08/SpringBoot_RestfullApi_POLSL
+```
 
-The following guides illustrate how to use some features concretely:
-
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-
+## License
+This application is on Apache 2.0 License [terms of use](https://www.apache.org/licenses/LICENSE-2.0).
