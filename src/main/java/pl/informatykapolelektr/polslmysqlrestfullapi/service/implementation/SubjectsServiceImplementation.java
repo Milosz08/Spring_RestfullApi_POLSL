@@ -92,7 +92,12 @@ public class SubjectsServiceImplementation implements SubjectService {
 
     @Override
     public void deleteSingleSubject(String id) {
-
+        Optional<Subject> findSubject = subjectRepository.findById(id);
+        if (findSubject.isPresent()) {
+            scheduleRepository.deleteAllScheduleSubjectsByTitle(findSubject.get().getTitle());
+        } else {
+            throw new ApiRequestException("Przedmiot o ID '" + id + "' nie znajduje się w bazie danych");
+        }
         subjectRepository.deleteById(id);
     }
 
@@ -101,6 +106,7 @@ public class SubjectsServiceImplementation implements SubjectService {
         semesterRepository.deleteAll();
         departmentRepository.deleteAll();
         classesItemRepository.deleteAll();
+        scheduleRepository.deleteAll();
         subjectRepository.deleteAll();
     }
 
