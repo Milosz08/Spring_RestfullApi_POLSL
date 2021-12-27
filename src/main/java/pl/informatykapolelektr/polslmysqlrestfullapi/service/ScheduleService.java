@@ -23,7 +23,7 @@ public interface ScheduleService {
     List<Schedule> getAllScheduleSubjects();
     List<Schedule> getAllScheduleByDay(int day);
     Schedule getSingleScheduleSubject(String id);
-    Schedule addScheduleSubject(Schedule schedule);
+    Schedule addScheduleSubject(Schedule schedule, String type);
     Schedule editScheduleSubject(String idS, Schedule schedule);
     void deleteSingleScheduleSubject(String id);
     void deleteAllScheduleSubjects();
