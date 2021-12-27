@@ -60,7 +60,7 @@ public class Schedule extends AuditModel {
 
     @NotEmpty(message = "Brak/puste pole odpowiadające za godzinę rozpoczęcia zajęć")
     @Pattern(
-        regexp = "/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/",
+        regexp = "^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])(:[0-5][0-9])?$",
         message = "Pole czasu rozpoczęcia zajęć nie jest w formacie HH:mm"
     )
     @Column(name = "schedule_subject_start", nullable = false)
@@ -68,7 +68,7 @@ public class Schedule extends AuditModel {
 
     @NotEmpty(message = "Brak/puste pole odpowiadające za godzinę zakończenia zajęć")
     @Pattern(
-        regexp = "/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/",
+        regexp = "^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])(:[0-5][0-9])?$",
         message = "Pole czasu zakończenia zajęć nie jest w formacie HH:mm"
     )
     @Column(name = "schedule_subject_end", nullable = false)
