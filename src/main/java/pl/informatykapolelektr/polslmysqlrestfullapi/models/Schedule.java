@@ -18,6 +18,7 @@ import lombok.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
@@ -90,5 +91,9 @@ public class Schedule extends AuditModel {
 
     @Column(name = "schedule_subject_link", nullable = false)
     private String link;
+
+    @OneToOne(targetEntity = Icon.class, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "icon_bind", referencedColumnName = "icon_id")
+    private Icon icon;
 
 }
