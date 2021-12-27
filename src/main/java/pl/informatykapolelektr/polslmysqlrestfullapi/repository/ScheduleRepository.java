@@ -19,6 +19,7 @@ import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
+import javax.transaction.*;
 import java.util.*;
 
 @Repository
@@ -29,5 +30,10 @@ public interface ScheduleRepository extends JpaRepository<Schedule, String> {
 
     @Query("SELECT s FROM Schedule s WHERE s.title=:t")
     Optional<Schedule> getScheduleSubjectByTitle(@Param("t") String title);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Schedule s WHERE s.title=:t")
+    void deleteAllScheduleSubjectsByTitle(@Param("t") String title);
 
 }
