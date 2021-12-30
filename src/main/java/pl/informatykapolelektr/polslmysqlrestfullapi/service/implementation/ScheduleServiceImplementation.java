@@ -36,6 +36,8 @@ public class ScheduleServiceImplementation implements ScheduleService {
     private IconRepository iconRepository;
     @Autowired
     private ClassesItemRepository classesItemRepository;
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     private static final String ALL = "wszystkie zajęcia";
 
@@ -91,6 +93,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
     private Schedule addOrUpdate(Schedule schedule, String type) {
         schedule.setRoom(schedule.getRoom().toUpperCase(Locale.ROOT));
         checkDayIsValid(schedule);
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.SCHEDULE);
         return fillObjectWithAdditionalValues(schedule, type);
     }
 
@@ -134,11 +137,13 @@ public class ScheduleServiceImplementation implements ScheduleService {
 
     @Override
     public void deleteSingleScheduleSubject(String id) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.SCHEDULE);
         scheduleRepository.deleteById(id);
     }
 
     @Override
     public void deleteAllScheduleSubjects() {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.SCHEDULE);
         scheduleRepository.deleteAll();
     }
 

@@ -30,6 +30,8 @@ public class UserMessageServiceImplementation implements UserMessageService {
 
     @Autowired
     private UserMessageRepository userMessageRepository;
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     @Override
     public List<UserMessage> getAllUserMessages() {
@@ -39,6 +41,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
     @Override
     public UserMessage addUserMessage(UserMessage userMessage) {
         userMessage.setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.USER_MESS);
         return userMessageRepository.save(userMessage);
     }
 
@@ -48,6 +51,7 @@ public class UserMessageServiceImplementation implements UserMessageService {
         if (updateUserMessage.isPresent()) {
             updateUserMessage.get().setIfClicked(true);
             updateUserMessage.get().setServletTime(new ServletTime(LocalDateTime.now()).getFullDate());
+            lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.USER_MESS);
             return userMessageRepository.save(updateUserMessage.get());
         }
         throw new ApiRequestException("Wiadomość o ID: '" + id + "' nie znajduje się w bazie danych");
@@ -55,11 +59,13 @@ public class UserMessageServiceImplementation implements UserMessageService {
 
     @Override
     public void deleteSingleUserMessage(String id) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.USER_MESS);
         userMessageRepository.deleteById(id);
     }
 
     @Override
     public void deleteAllUserMessages() {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.USER_MESS);
         userMessageRepository.deleteAll();
     }
 

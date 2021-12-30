@@ -33,6 +33,8 @@ public class CalendarServiceImplementation implements CalendarService {
     private CalendarRepository calendarRepository;
     @Autowired
     private CalendarItemsRepository calendarItemsRepository;
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     private Calendar addOrUpdate(Calendar calendar) {
         for (CalendarItems item : calendar.getItems()) {
@@ -72,6 +74,7 @@ public class CalendarServiceImplementation implements CalendarService {
 
     @Override
     public Calendar addCalendar(Calendar calendar) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.CALENDAR);
         return addOrUpdate(calendar);
     }
 
@@ -80,6 +83,7 @@ public class CalendarServiceImplementation implements CalendarService {
         Optional<Calendar> calendarFind = calendarRepository.findById(id);
         calendar.set_id(id);
         if (calendarFind.isPresent()) {
+            lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.CALENDAR);
             return addOrUpdate(calendar);
         }
         throw new ApiRequestException("Zawartość kalendarza o ID: '" + id + "' nie znajduje się w bazie danych");
@@ -87,11 +91,13 @@ public class CalendarServiceImplementation implements CalendarService {
 
     @Override
     public void deleteSingleCalendar(String id) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.CALENDAR);
         calendarRepository.deleteById(id);
     }
 
     @Override
     public void deleteCalendars() {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.CALENDAR);
         calendarRepository.deleteAll();
     }
 

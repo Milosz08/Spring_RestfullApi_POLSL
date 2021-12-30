@@ -37,12 +37,15 @@ public class SubjectsServiceImplementation implements SubjectService {
     private ClassesItemRepository classesItemRepository;
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     private Subject addOrUpdate(Subject subject) {
         subject.getIcon().set_id(new RandomHexGenerator().generateSequence());
         ManyToManyManageEntities.addOrUpdateSemesters(subject, semesterRepository);
         ManyToManyManageEntities.addOrUpdateDepartments(subject, departmentRepository);
         ManyToManyManageEntities.addOrUpdateClassesItems(subject, classesItemRepository);
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.SUBJECTS);
         subjectRepository.save(subject);
         return subject;
     }
@@ -115,11 +118,13 @@ public class SubjectsServiceImplementation implements SubjectService {
         } else {
             throw new ApiRequestException("Przedmiot o ID '" + id + "' nie znajduje się w bazie danych");
         }
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.SUBJECTS);
         subjectRepository.deleteById(id);
     }
 
     @Override
     public void deleteAllSubject() {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.SUBJECTS);
         semesterRepository.deleteAll();
         departmentRepository.deleteAll();
         classesItemRepository.deleteAll();

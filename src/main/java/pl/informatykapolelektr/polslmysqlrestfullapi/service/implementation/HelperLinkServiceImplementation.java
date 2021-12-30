@@ -32,11 +32,14 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
     private HelperLinkRepository helperLinkRepository;
     @Autowired
     private IconRepository iconRepository;
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     private HelperLink addOrUpdate(HelperLink helperLink) {
         helperLink.getHelperIcon().set_id(new RandomHexGenerator().generateSequence());
         helperLinkRepository.save(helperLink);
         iconRepository.save(helperLink.getHelperIcon());
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.HELPERS);
         return helperLink;
     }
 
@@ -71,11 +74,13 @@ public class HelperLinkServiceImplementation implements HelperLinkService {
 
     @Override
     public void deleteSingleHelperLink(String id) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.HELPERS);
         helperLinkRepository.deleteById(id);
     }
 
     @Override
     public void deleteAllHelperLink() {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.HELPERS);
         helperLinkRepository.deleteAll();
     }
 

@@ -29,6 +29,8 @@ public class CovidServiceImplementation implements CovidService {
 
     @Autowired
     private CovidRepository covidRepository;
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     @Override
     public List<Covid> getAllCovidData() {
@@ -37,6 +39,7 @@ public class CovidServiceImplementation implements CovidService {
 
     @Override
     public Covid addCovidData(Covid covid) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.COVID);
         return covidRepository.save(covid);
     }
 
@@ -45,6 +48,7 @@ public class CovidServiceImplementation implements CovidService {
         Optional<Covid> covidUpdate = covidRepository.findByType(type);
         if (covidUpdate.isPresent()) {
             covid.set_id(covidUpdate.get().get_id());
+            lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.COVID);
             return covidRepository.save(covid);
         }
         throw new ApiRequestException("Element o typie: '" + type + "' nie znajduje się w bazie danych");

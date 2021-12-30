@@ -32,10 +32,12 @@ public class UserServiceImplementation implements UserService {
 
     private final UserRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LastUpdateService lastUpdateService;
 
-    public UserServiceImplementation(UserRepository usersRepository) {
+    public UserServiceImplementation(UserRepository usersRepository, LastUpdateService lastUpdateService) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
+        this.lastUpdateService = lastUpdateService;
     }
 
     @Override
@@ -54,6 +56,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User addUser(User user) {
+        lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.AUTH);
         return usersRepository.save(encodeFields(user));
     }
 
@@ -62,6 +65,7 @@ public class UserServiceImplementation implements UserService {
         Optional<User> userUpdate = usersRepository.findByRole(role);
         if (userUpdate.isPresent()) {
             user.set_id(userUpdate.get().get_id());
+            lastUpdateService.updateSelectedSection(Enums.AllUpdateTypes.AUTH);
             return usersRepository.save(encodeFields(user));
         }
         throw new ApiRequestException("Użytkownik z rolą: '" + role + "' nie znajduje się w bazie danych");
