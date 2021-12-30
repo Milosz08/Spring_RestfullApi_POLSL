@@ -12,16 +12,20 @@
  * governing permissions and limitations under the license.
  */
 
-package pl.informatykapolelektr.polslmysqlrestfullapi.service;
+package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
+import org.springframework.stereotype.*;
+import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
 
 import java.util.*;
 
-public interface LastUpdateService {
+@Repository
+public interface LastUpdateRepository extends JpaRepository<LastUpdate, String> {
 
-    List<Map<String, Object>> getAllLastUpdates();
-    Map<String, Object> getSingleLastUpdate(Enums.AllUpdateTypes type);
-    void updateSelectedSection(Enums.AllUpdateTypes type);
+    @Query("SELECT u FROM LastUpdate u WHERE u.updateDateFor=:t")
+    Optional<LastUpdate> getLastUpdateByType(@Param("t") Enums.AllUpdateTypes type);
 
 }
