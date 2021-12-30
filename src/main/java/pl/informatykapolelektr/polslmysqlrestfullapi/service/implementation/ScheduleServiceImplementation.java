@@ -60,14 +60,12 @@ public class ScheduleServiceImplementation implements ScheduleService {
         sI.setType(fI.getType().toLowerCase().equals(ALL) ? type : fI.getType());
         sI.setPlace(fI.getPlace());
         sI.setLink(fI.getLink());
-        if (fI.getType().toLowerCase().equals("wszystkie zajęcia")) {
-            List<ClassesItem> findClItem = classesItemRepository.getClassesItemBy(sI.getType(), sI.getPlace(), sI.getLink());
-            if (findClItem.isEmpty()) {
-                sI.set_id(new RandomHexGenerator().generateSequence());
-                classesItemRepository.save(sI);
-            } else {
-                sI.set_id(findClItem.get(0).get_id());
-            }
+        List<ClassesItem> findClItem = classesItemRepository.getClassesItemBy(sI.getType(), sI.getPlace(), sI.getLink());
+        if (findClItem.isEmpty()) {
+            sI.set_id(new RandomHexGenerator().generateSequence());
+            classesItemRepository.save(sI);
+        } else {
+            sI.set_id(findClItem.get(0).get_id());
         }
         return sI;
     }
@@ -76,7 +74,7 @@ public class ScheduleServiceImplementation implements ScheduleService {
         Optional<Subject> findSubject = subjectRepository.findSubjectByTitle(schedule.getTitle());
         if (findSubject.isPresent()) {
             Optional<ClassesItem> findItem = findSubject.get().getClassesPlatforms().stream().filter(item -> (
-                item.getType().toLowerCase().equals(type.toLowerCase()) || item.getType().toLowerCase().equals(ALL))
+                    item.getType().toLowerCase().equals(type.toLowerCase()) || item.getType().toLowerCase().equals(ALL))
             ).findFirst();
             if (findItem.isPresent()) {
                 ClassesItem saveItem = insertAdditionalClassesInfo(findItem.get(), schedule.getClassesInfo(), type);
