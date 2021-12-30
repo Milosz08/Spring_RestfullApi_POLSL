@@ -51,16 +51,14 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleService.getSingleScheduleSubject(id), HttpStatus.OK);
     }
 
-    @PostMapping("/{type}")
-    public ResponseEntity<Schedule> addScheduleSubject(@Valid @RequestBody Schedule schedule, @PathVariable String type) {
-        return new ResponseEntity<>(scheduleService.addScheduleSubject(schedule, type), HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<Schedule> addScheduleSubject(@Valid @RequestBody Schedule schedule) {
+        return new ResponseEntity<>(scheduleService.addScheduleSubject(schedule), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}/{type}")
-    public ResponseEntity<Schedule> editScheduleSubject(
-            @PathVariable String id, @PathVariable String type, @Valid @RequestBody Schedule schedule
-    ) {
-        return new ResponseEntity<>(scheduleService.editScheduleSubject(id, type, schedule), HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<Schedule> editScheduleSubject(@PathVariable String id, @Valid @RequestBody Schedule schedule) {
+        return new ResponseEntity<>(scheduleService.editScheduleSubject(id, schedule), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

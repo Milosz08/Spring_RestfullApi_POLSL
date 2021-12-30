@@ -116,20 +116,20 @@ public class ScheduleServiceImplementation implements ScheduleService {
     }
 
     @Override
-    public Schedule addScheduleSubject(Schedule schedule, String type) {
+    public Schedule addScheduleSubject(Schedule schedule) {
         Optional<Subject> findSubject = subjectRepository.findSubjectByTitle(schedule.getTitle());
         if (findSubject.isPresent()) {
-            return addOrUpdate(schedule, type);
+            return addOrUpdate(schedule, schedule.getType());
         }
         throw new ApiRequestException("Przedmiot o tytule '" + schedule.getTitle() + "' nie istenieje w tabeli nadrzędnej");
     }
 
     @Override
-    public Schedule editScheduleSubject(String id, String type, Schedule schedule) {
+    public Schedule editScheduleSubject(String id, Schedule schedule) {
         Optional<Schedule> findScheduleSubject = scheduleRepository.findById(id);
         if (findScheduleSubject.isPresent()) {
             schedule.set_id(id);
-            return addOrUpdate(schedule, type);
+            return addOrUpdate(schedule, schedule.getType());
         }
         throw new ApiRequestException("Przedmiot o ID: '" + id + "' nie znajduje się w bazie danych");
     }

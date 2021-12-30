@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.models;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import org.hibernate.annotations.*;
 
@@ -82,6 +83,14 @@ public class Schedule extends AuditModel {
     )
     @Column(name = "schedule_subject_room", nullable = false)
     private String room;
+
+    @NotEmpty(message = "Brak/puste pole odpowiadające za typ odbywanych zajęć")
+    @Size(
+            min = 2, max = 30,
+            message = "Pole odpowiadające za typ zajęć nie mieści się w zakresie od 2 do 30 znaków"
+    )
+    @Column(name = "schedule_subject_type", nullable = false)
+    private String type;
 
     @OneToOne(targetEntity = ClassesItem.class, cascade = CascadeType.MERGE)
     @JoinColumn(name = "classes_bind", referencedColumnName = "classes_id")
