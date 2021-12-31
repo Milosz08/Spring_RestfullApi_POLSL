@@ -50,12 +50,6 @@ public class ScheduleServiceImplementation implements ScheduleService {
     private void insertAdditionalIcon(Schedule schedule, Icon icon, Subject subject) {
         List<Icon> findIcons = iconRepository.getIconsByNameAndFamily(icon.getFamily(), icon.getName());
         schedule.setIcon(subject.getIcon());
-        if (findIcons.isEmpty()) {
-            schedule.getIcon().set_id(new RandomHexGenerator().generateSequence());
-            iconRepository.save(schedule.getIcon());
-        } else {
-            schedule.getIcon().set_id(findIcons.get(0).get_id());
-        }
     }
 
     private ClassesItem insertAdditionalClassesInfo(ClassesItem fI, ClassesItem sI, String type) {
