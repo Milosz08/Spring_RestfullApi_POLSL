@@ -19,79 +19,46 @@ import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 
 import java.util.*;
 
-public class ManyToManyManageEntities<T> {
+public class ManyToManyManageEntities {
 
-    private final List<T> elementToFind;
-    private final Callback<T> callback;
-
-    public ManyToManyManageEntities(List<T> elementToFind, Callback<T> callback) {
-        this.elementToFind = elementToFind;
-        this.callback = callback;
-    }
-
-    public void manageEntity() {
-        for (T entity : elementToFind) {
-            List<T> findElement = callback.findElement(entity);
+    public static void addOrUpdateSemesters(Subject subject, SemesterRepository repo) {
+        for (Semester semester : subject.getSemesters()) {
+            List<Semester> findElement = repo.getSemesterBy(semester.getIdentity(), semester.getName());
             if (findElement.isEmpty()) {
-                callback.actionOnEmpty(entity);
+                semester.set_id(new RandomHexGenerator().generateSequence());
+                repo.save(semester);
             } else {
-                callback.actionOnNonEmpty(entity, findElement);
+                semester.set_id(findElement.get(0).get_id());
             }
         }
     }
 
-    public static void addOrUpdateSemesters(Subject subject, SemesterRepository repo) {
-        new ManyToManyManageEntities<>(subject.getSemesters(), new Callback<>() {
-            @Override
-            public List<Semester> findElement(Semester entity) {
-                return repo.getSemesterBy(entity.getIdentity(), entity.getName());
-            }
-            @Override
-            public void actionOnEmpty(Semester entity) {
-                entity.set_id(new RandomHexGenerator().generateSequence());
-                repo.save(entity);
-            }
-            @Override
-            public void actionOnNonEmpty(Semester entity, List<Semester> findElms) {
-                entity.set_id(findElms.get(0).get_id());
-            }
-        }).manageEntity();
-    }
-
     public static void addOrUpdateDepartments(Subject subject, DepartmentRepository repo) {
-        new ManyToManyManageEntities<>(subject.getDepartments(), new Callback<>() {
-            @Override
-            public List<Department> findElement(Department entity) {
-                return repo.getDepartmentBy(entity.getTitle(), entity.getShortName(), entity.getLink());
+        for (Department department : subject.getDepartments()) {
+            List<Department> findElement = repo.getDepartmentBy(
+                    department.getTitle(), department.getShortName(), department.getLink()
+            );
+            if (findElement.isEmpty()) {
+                department.set_id(new RandomHexGenerator().generateSequence());
+                repo.save(department);
+            } else {
+                department.set_id(findElement.get(0).get_id());
             }
-            @Override
-            public void actionOnEmpty(Department entity) {
-                entity.set_id(new RandomHexGenerator().generateSequence());
-                repo.save(entity);
-            }
-            @Override
-            public void actionOnNonEmpty(Department entity, List<Department> findElms) {
-                entity.set_id(findElms.get(0).get_id());
-            }
-        }).manageEntity();
+        }
     }
 
     public static void addOrUpdateClassesItems(Subject subject, ClassesItemRepository repo) {
-        new ManyToManyManageEntities<>(subject.getClassesPlatforms(), new Callback<>() {
-            @Override
-            public List<ClassesItem> findElement(ClassesItem entity) {
-                return repo.getClassesItemBy(entity.getType(), entity.getPlace(), entity.getLink());
+        for (ClassesItem classesItem : subject.getClassesPlatforms()) {
+            List<ClassesItem> findElement = repo.getClassesItemBy(
+                    classesItem.getType(), classesItem.getPlace(), classesItem.getLink()
+            );
+            if (findElement.isEmpty()) {
+                classesItem.set_id(new RandomHexGenerator().generateSequence());
+                repo.save(classesItem);
+            } else {
+                classesItem.set_id(findElement.get(0).get_id());
             }
-            @Override
-            public void actionOnEmpty(ClassesItem entity) {
-                entity.set_id(new RandomHexGenerator().generateSequence());
-                repo.save(entity);
-            }
-            @Override
-            public void actionOnNonEmpty(ClassesItem entity, List<ClassesItem> findElms) {
-                entity.set_id(findElms.get(0).get_id());
-            }
-        }).manageEntity();
+        }
     }
 
 }
