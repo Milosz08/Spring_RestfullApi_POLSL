@@ -16,10 +16,12 @@ package pl.informatykapolelektr.polslmysqlrestfullapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.*;
+import org.springframework.boot.builder.*;
+import org.springframework.boot.web.servlet.support.*;
 import org.springframework.data.jpa.repository.config.*;
 
-@SpringBootApplication
-@EnableJpaAuditing
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class PolslMysqlRestfullApiApplication {
 
     public static void main(String[] args) {
