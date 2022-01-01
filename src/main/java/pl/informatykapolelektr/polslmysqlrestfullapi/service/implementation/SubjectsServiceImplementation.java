@@ -52,24 +52,14 @@ public class SubjectsServiceImplementation implements SubjectService {
 
     private List<Semester> sortSemesters(Subject subject) {
         List<Semester> beforeSorting = subject.getSemesters();
-        Collections.sort(beforeSorting, new Comparator<Semester>() {
-            @Override
-            public int compare(Semester o1, Semester o2) {
-                return o1.getIdentity() - o2.getIdentity();
-            }
-        });
+        beforeSorting.sort(Comparator.comparingInt(Semester::getIdentity));
         return beforeSorting;
     }
 
     @Override
     public List<Subject> getAllSubjects() {
         List<Subject> beforeSorted = subjectRepository.findAll();
-        Collections.sort(beforeSorted, new Comparator<Subject>() {
-            @Override
-            public int compare(Subject o1, Subject o2) {
-                return o1.getTitle().compareTo(o2.getTitle());
-            }
-        });
+        beforeSorted.sort(Comparator.comparing(Subject::getTitle));
         for(Subject subject : beforeSorted) {
             subject.setSemesters(sortSemesters(subject));
         }

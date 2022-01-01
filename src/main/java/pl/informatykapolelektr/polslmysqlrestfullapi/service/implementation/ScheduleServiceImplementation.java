@@ -33,8 +33,6 @@ public class ScheduleServiceImplementation implements ScheduleService {
     @Autowired
     private SubjectRepository subjectRepository;
     @Autowired
-    private IconRepository iconRepository;
-    @Autowired
     private ClassesItemRepository classesItemRepository;
     @Autowired
     private LastUpdateService lastUpdateService;
@@ -47,13 +45,8 @@ public class ScheduleServiceImplementation implements ScheduleService {
         }
     }
 
-    private void insertAdditionalIcon(Schedule schedule, Icon icon, Subject subject) {
-        List<Icon> findIcons = iconRepository.getIconsByNameAndFamily(icon.getFamily(), icon.getName());
-        schedule.setIcon(subject.getIcon());
-    }
-
     private ClassesItem insertAdditionalClassesInfo(ClassesItem fI, ClassesItem sI, String type) {
-        sI.setType(fI.getType().toLowerCase().equals(ALL) ? type : fI.getType());
+        sI.setType(fI.getType().equalsIgnoreCase(ALL) ? type : fI.getType());
         sI.setPlace(fI.getPlace());
         sI.setLink(fI.getLink());
         List<ClassesItem> findClItem = classesItemRepository.getClassesItemBy(sI.getType(), sI.getPlace(), sI.getLink());
@@ -70,11 +63,11 @@ public class ScheduleServiceImplementation implements ScheduleService {
         Optional<Subject> findSubject = subjectRepository.findSubjectByTitle(schedule.getTitle());
         if (findSubject.isPresent()) {
             Optional<ClassesItem> findItem = findSubject.get().getClassesPlatforms().stream().filter(item -> (
-                    item.getType().toLowerCase().equals(type.toLowerCase()) || item.getType().toLowerCase().equals(ALL))
+                    item.getType().equalsIgnoreCase(type) || item.getType().equalsIgnoreCase(ALL))
             ).findFirst();
             if (findItem.isPresent()) {
                 ClassesItem saveItem = insertAdditionalClassesInfo(findItem.get(), schedule.getClassesInfo(), type);
-                insertAdditionalIcon(schedule, findSubject.get().getIcon(), findSubject.get());
+                schedule.setIcon(findSubject.get().getIcon());
                 schedule.setClassesInfo(saveItem);
                 scheduleRepository.save(schedule);
                 return schedule;
