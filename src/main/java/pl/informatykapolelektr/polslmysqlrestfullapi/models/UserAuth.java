@@ -30,7 +30,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "credentials")
-public class User extends AuditModel {
+public class UserAuth extends AuditModel {
 
     @Id
     @GenericGenerator(
@@ -44,11 +44,11 @@ public class User extends AuditModel {
     @Column(name = "user_role", unique = true)
     private int role = 0;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za nazwę użytkownika")
+    @NotNull(message = "Brak/puste pole odpowiadające za nazwę użytkownika")
     @Column(name = "user_name", nullable = false)
     private String username;
 
-    @NotEmpty(message = "Brak/puste pole odpowiadające za hasło użytkownika")
+    @NotNull(message = "Brak/puste pole odpowiadające za hasło użytkownika")
     @Column(name = "user_password", nullable = false)
     private String password;
 

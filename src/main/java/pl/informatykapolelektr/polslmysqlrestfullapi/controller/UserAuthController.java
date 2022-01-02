@@ -30,28 +30,29 @@ import java.util.*;
 @RestController
 @RequestMapping(DEF_PREFIX + CREDENTIALS)
 @CrossOrigin
-public class UserController {
+public class UserAuthController {
 
     @Autowired
     private UserAuthService usersService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserAuth>> getAllUsers() {
         return new ResponseEntity<>(usersService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/{role}")
-    public ResponseEntity<User> getSingleUser(@PathVariable int role) {
+    public ResponseEntity<UserAuth> getSingleUser(@PathVariable int role) {
         return new ResponseEntity<>(usersService.getSingleUser(role), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
-        return new ResponseEntity<>(usersService.addUser(user), HttpStatus.CREATED);
+    public ResponseEntity<UserAuth> addUser(@Valid @RequestBody UserAuth userAuth) {
+        return new ResponseEntity<>(usersService.addUser(userAuth), HttpStatus.CREATED);
     }
 
     @PutMapping("/{role}")
-    public ResponseEntity<User> updateUser(@PathVariable int role, @RequestBody User user) {
-        return new ResponseEntity<>(usersService.editUser(role, user), HttpStatus.OK);
+    public ResponseEntity<UserAuth> updateUser(@PathVariable int role, @RequestBody UserAuth userAuth) {
+        return new ResponseEntity<>(usersService.editUser(role, userAuth), HttpStatus.OK);
     }
+
 }

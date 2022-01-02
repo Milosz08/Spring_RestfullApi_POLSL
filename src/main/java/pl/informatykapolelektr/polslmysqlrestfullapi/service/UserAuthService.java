@@ -12,20 +12,17 @@
  * governing permissions and limitations under the license.
  */
 
-package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
+package pl.informatykapolelektr.polslmysqlrestfullapi.service;
 
-import org.springframework.data.jpa.repository.*;
-import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
 import java.util.*;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserAuthService {
 
-    Optional<User> findByRole(int role);
-
-    @Query("SELECT u.updatedAt FROM User u ORDER BY u.updatedAt")
-    List<Date> findLastEditField();
+    List<User> getAllUsers();
+    User getSingleUser(int role);
+    User addUser(User user);
+    User editUser(int role, User user);
 
 }
