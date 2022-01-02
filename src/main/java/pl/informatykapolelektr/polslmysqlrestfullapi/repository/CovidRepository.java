@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.utils.*;
@@ -24,9 +25,7 @@ import java.util.*;
 @Repository
 public interface CovidRepository extends JpaRepository<Covid, String> {
 
-    Optional<Covid> findByType(Enums.CovidDataEnums type);
-
-    @Query("SELECT c.updatedAt FROM Covid c ORDER BY c.updatedAt")
-    List<Date> findLastEditField();
+    @Query("SELECT c FROM Covid c WHERE c.type=:t")
+    Optional<Covid> findByType(@Param("t") Enums.CovidDataEnums type);
 
 }
