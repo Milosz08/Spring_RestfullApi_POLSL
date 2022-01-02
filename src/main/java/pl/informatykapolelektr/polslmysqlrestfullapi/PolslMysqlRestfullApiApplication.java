@@ -21,7 +21,8 @@ import org.springframework.boot.builder.*;
 import org.springframework.boot.web.servlet.support.*;
 import org.springframework.data.jpa.repository.config.*;
 
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
+@EnableJpaAuditing
 public class PolslMysqlRestfullApiApplication {
 
     public static void main(String[] args) {
