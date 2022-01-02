@@ -14,6 +14,8 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
 
+import pl.informatykapolelektr.polslmysqlrestfullapi.exceptions.*;
+
 import java.util.*;
 
 public class ReturnedJsonContent {
@@ -33,9 +35,38 @@ public class ReturnedJsonContent {
         return servletTime;
     }
 
+    private static Map<String, Object> generateCredentialsFields(List<Boolean> valid) {
+        Map<String, Object> credentialsFields = new LinkedHashMap<>();
+        String[] allKeys = { "username", "password", "token" };
+        if(valid.isEmpty() || valid.size() > 3) {
+            throw new ApiRequestException("Credentials data fields have bad size");
+        }
+        for(int i = 0; i < allKeys.length; i++) {
+            credentialsFields.put(allKeys[i], !valid.get(i));
+        }
+        return credentialsFields;
+    }
+
     public static Map<String, Object> returnedUpdatedDateContent(Enums.AllUpdateTypes type, String date) {
         Map<String, Object> body = generateUpdatedBasicInfo(type);
         body.put("servletTime", generateServletTimeInfo(date));
+        return body;
+    }
+
+    public static Map<String, Object> returnedCredentials(List<Boolean> valid, int role, boolean error, String jwt) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("valid", error ? "Brak autoryzacji" : "Autoryzacja uzyskana");
+        body.put("authLevel", role);
+        body.put("jwtToken", jwt);
+        body.put("fieldsErrors", generateCredentialsFields(valid));
+        return body;
+    }
+
+    public static Map<String, Object> returnedCredentialsNotFound() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("valid", "Nie znaleziono użytkownika");
+        body.put("authLevel", null);
+        body.put("fieldsErrors", generateCredentialsFields(Arrays.asList(false, false, false)));
         return body;
     }
 
