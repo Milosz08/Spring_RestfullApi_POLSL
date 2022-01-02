@@ -40,6 +40,16 @@ public class UserAuthController {
         return new ResponseEntity<>(usersService.getAllUsers(), HttpStatus.OK);
     }
 
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> validateCredentials(@Valid @RequestBody UserAuth userAuth) {
+        return usersService.validateCredentials(userAuth);
+    }
+
+    @PostMapping("/authenticate/user")
+    public ResponseEntity<?> validateCredentialsUser(@Valid @RequestBody UserAuth userAuth) {
+        return usersService.validateCredentialsUser(userAuth);
+    }
+
     @GetMapping("/{role}")
     public ResponseEntity<UserAuth> getSingleUser(@PathVariable int role) {
         return new ResponseEntity<>(usersService.getSingleUser(role), HttpStatus.OK);

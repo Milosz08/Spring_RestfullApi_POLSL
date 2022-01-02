@@ -14,15 +14,19 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.service;
 
+import org.springframework.http.*;
+import org.springframework.security.core.userdetails.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
 import java.util.*;
 
 public interface UserAuthService {
 
-    List<User> getAllUsers();
-    User getSingleUser(int role);
-    User addUser(User user);
-    User editUser(int role, User user);
+    List<UserAuth> getAllUsers();
+    UserAuth getSingleUser(int role);
+    UserAuth addUser(UserAuth userAuth);
+    ResponseEntity<Map<String, Object>> validateCredentials(UserAuth userAuth);
+    ResponseEntity<Map<String, Object>> validateCredentialsUser(UserAuth userAuth);
+    UserAuth editUser(int role, UserAuth userAuth);
 
 }

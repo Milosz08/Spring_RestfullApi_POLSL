@@ -15,6 +15,7 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.*;
 import org.springframework.stereotype.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
 
@@ -23,9 +24,13 @@ import java.util.*;
 @Repository
 public interface UserAuthRepository extends JpaRepository<UserAuth, String> {
 
-    Optional<User> findByRole(int role);
-
-    @Query("SELECT u.updatedAt FROM User u ORDER BY u.updatedAt")
+    @Query("SELECT u.updatedAt FROM UserAuth u ORDER BY u.updatedAt")
     List<Date> findLastEditField();
+
+    @Query("SELECT u FROM UserAuth u WHERE u.role=:r")
+    Optional<UserAuth> findUserByRole(@Param("r") int role);
+
+    @Query("SELECT u FROM UserAuth u WHERE u.username=:n")
+    Optional<UserAuth> findUserAuthByUsername(@Param("n") String username);
 
 }
