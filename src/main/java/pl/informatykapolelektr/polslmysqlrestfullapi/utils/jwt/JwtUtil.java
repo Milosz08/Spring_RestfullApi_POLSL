@@ -15,8 +15,12 @@
 package pl.informatykapolelektr.polslmysqlrestfullapi.utils.jwt;
 
 import io.jsonwebtoken.*;
+
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
+
+import pl.informatykapolelektr.polslmysqlrestfullapi.repository.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -24,7 +28,8 @@ import java.util.function.*;
 @Service
 public class JwtUtil {
 
-    private String SECRET_KEY = "secret";
+    @Value("{web.token.config}")
+    private String SECRET_KEY;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
