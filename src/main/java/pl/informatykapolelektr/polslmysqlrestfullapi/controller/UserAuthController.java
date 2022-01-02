@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +32,8 @@ import java.util.*;
 @CrossOrigin
 public class UserController {
 
-    private final UserService usersService;
-
-    public UserController(UserService usersService) {
-        this.usersService = usersService;
-    }
+    @Autowired
+    private UserAuthService usersService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {

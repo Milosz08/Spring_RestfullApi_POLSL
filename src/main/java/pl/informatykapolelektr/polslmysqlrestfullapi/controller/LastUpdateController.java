@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.service.*;
@@ -28,11 +29,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class LastUpdateController {
 
-    private final LastUpdateService lastUpdateService;
-
-    public LastUpdateController(LastUpdateService lastUpdateService) {
-        this.lastUpdateService = lastUpdateService;
-    }
+    @Autowired
+    private LastUpdateService lastUpdateService;
 
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getAllLastUpdates() {

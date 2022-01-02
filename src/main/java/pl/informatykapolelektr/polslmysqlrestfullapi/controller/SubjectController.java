@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -29,11 +30,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class SubjectController {
 
-    private final SubjectService subjectService;
-
-    public SubjectController(SubjectService subjectService) {
-        this.subjectService = subjectService;
-    }
+    @Autowired
+    private SubjectService subjectService;
 
     @GetMapping
     public ResponseEntity<List<Subject>> getAllSubjects() {

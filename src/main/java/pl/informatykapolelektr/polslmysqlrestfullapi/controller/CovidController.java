@@ -30,11 +30,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class CovidController {
 
-    private final CovidService covidService;
-
-    public CovidController(CovidService covidService) {
-        this.covidService = covidService;
-    }
+    @Autowired
+    private CovidService covidService;
 
     @GetMapping
     public ResponseEntity<List<Covid>> getAllCovidData() {

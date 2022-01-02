@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.security.core.parameters.*;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class ScheduleController {
 
-    private final ScheduleService scheduleService;
-
-    public ScheduleController(ScheduleService scheduleService) {
-        this.scheduleService = scheduleService;
-    }
+    @Autowired
+    private ScheduleService scheduleService;
 
     @GetMapping
     public ResponseEntity<List<Schedule>> getAllScheduleSubjects() {

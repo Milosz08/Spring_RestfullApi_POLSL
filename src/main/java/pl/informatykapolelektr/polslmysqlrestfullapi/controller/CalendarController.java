@@ -29,11 +29,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class CalendarController {
 
-    private final CalendarService calendarService;
-
-    public CalendarController(CalendarService calendarService) {
-        this.calendarService = calendarService;
-    }
+    @Autowired
+    private CalendarService calendarService;
 
     @GetMapping
     public ResponseEntity<List<Calendar>> getAllCalendars() {

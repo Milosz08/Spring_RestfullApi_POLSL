@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -29,11 +30,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class HelperLinkController {
 
-    private final HelperLinkService helperLinkService;
-
-    public HelperLinkController(HelperLinkService helperLinkService) {
-        this.helperLinkService = helperLinkService;
-    }
+    @Autowired
+    private HelperLinkService helperLinkService;
 
     @GetMapping
     public ResponseEntity<List<HelperLink>> getAllHelperLinks() {

@@ -14,6 +14,7 @@
 
 package pl.informatykapolelektr.polslmysqlrestfullapi.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import pl.informatykapolelektr.polslmysqlrestfullapi.models.*;
@@ -28,11 +29,8 @@ import static pl.informatykapolelektr.polslmysqlrestfullapi.utils.ServletConfig.
 @CrossOrigin
 public class UserMessageController {
 
-    private final UserMessageService userMessageService;
-
-    public UserMessageController(UserMessageService userMessageService) {
-        this.userMessageService = userMessageService;
-    }
+    @Autowired
+    private UserMessageService userMessageService;
 
     @GetMapping
     public ResponseEntity<List<UserMessage>> getAllUserMessages() {
