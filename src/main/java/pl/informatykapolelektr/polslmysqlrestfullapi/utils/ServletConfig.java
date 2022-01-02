@@ -16,9 +16,6 @@ package pl.informatykapolelektr.polslmysqlrestfullapi.utils;
 
 public class ServletConfig {
 
-    // default app prefix
-    public static final String DEF_PREFIX = "/api/v2/javabean/";
-
     // app endpoints
     public static final String CREDENTIALS = "credentials";
     public static final String CALENDAR = "calendar";
@@ -28,5 +25,9 @@ public class ServletConfig {
     public static final String LAST_UPDATES = "updates";
     public static final String SUBJECTS = "subjects";
     public static final String SCHEDULE = "schedule";
+
+    // misc
+    public static final String FRONT_APP = "http://localhost:3000";
+    public static final String DEF_PREFIX = "/api/v2/javabean/";
 
 }
