@@ -14,7 +14,7 @@ RestAPI created for ReactJS application using Java and Spring Boot framework. To
 <hr/>
 
 ## About the Project
-For the back-end of the application written in ReactJS, I decided to use Java Spring Boot because it integrates well with the React environment and is stable and more safe to other solutions (e.g. PHP or NodeJS). I decided to store the data in the application in the popular relational mySQL database due to the lack of redundancy and consistency of the inserting data. In this project JPA and Hibernate technologies are responsible for integration of object model (Java) with table model (mySQL).
+For the back-end of the application written in ReactJS, I decided to use Java Spring Boot because it integrates well with the React environment and is stable and more safe to other solutions (e.g. PHP or NodeJS). I decided to store the data in the application in the popular relational mySQL database due to the lack of redundancy and consistency of the inserting data. In this project JPA and Hibernate technologies are responsible for integration of object model (Java) with relation model (mySQL).
 
 ## Security (JWT)
 This API is fully protected by JWT technology. Without authorization, only GET methods and selected endpoints with POST method are available. To handle the rest, a Bearer token is required (this is automatically generated upon successful customer login and is deleted immediately upon logout).
