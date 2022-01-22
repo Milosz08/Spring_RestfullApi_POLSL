@@ -8,7 +8,7 @@
 RestAPI created for ReactJS application using Java and Spring Boot framework. To create this programming interface I used JPA and Hibernate to provide a connection between object-oriented programming and storing data as tables in mySQL database.
 </p>
 
-> See this website at [informatyka-pol-elektr.pl](https://informatyka-pol-elektr.pl/) <br>
+> See this website at [informatykaelektr.pl](https://informatykaelektr.pl/) <br>
 > See Front-end for this website written in ReactJS in my repo: [ReactJS_Web_Application_POLSL](https://github.com/Milosz08/ReactJS_Web_Application_POLSL)
 
 <hr/>
